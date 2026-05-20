@@ -18,24 +18,27 @@ class Aluno {
  +toString()
 }
 
-class AlunoAvaliacaoFisica {
- -aluno: ForeignKey[Aluno]
- -avaliacao_fisica: ForeignKey[AvalicaoFisica]
+class Plano {
+  -nome_plano: Char
+  -descricao: Char
+  -preco: Float
+  +toString()
 }
 
-class AvalicaoFisica {
- -descricao: Text
- -peso: Float
- -altura: Float
- -percentual_gordura: Float
- -calorias_diarias: Float
- -data_avaliacao: Date
+class AlunoChecklistSaude {
+ -aluno: ForeignKey[Aluno]
+ -checklist_saude: ForeignKey[ChecklistSaude]
+}
+
+class ChecklistSaude {
+ -nome: Char
  -aluno: ForeignKey[Aluno]
  +toString()
 }
 
 class Personal {
- -salario: Float
+ -registroCREF: Char
+ -tipo_treinamento: CharChoices
  +toString()
 }
 
@@ -74,7 +77,8 @@ class GrupoMuscular {
 }
 
 class Nutricionista {
- -salario: Float
+ -registroCRN: Char
+ -abordagem_nutricional: Char
  +toString()
 }
 
@@ -117,9 +121,10 @@ class CategoriaAlimento {
 }
 
 Aluno *--> FichaTreino : 0..n
+Aluno *--> Plano : 1..1
 Personal *--> FichaTreino : 0..n
-Aluno *--> AlunoAvaliacaoFisica : 0..n
-AvalicaoFisica *--> AlunoAvaliacaoFisica : 0..n
+Aluno *--> AlunoChecklistSaude : 0..n
+ChecklistSaude *--> AlunoChecklistSaude : 0..n
 
 
 FichaTreino *--> DiaTreino : 1..n
