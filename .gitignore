@@ -1,0 +1,5 @@
+modeloapp/__pycache__/*
+/apps/core/__pycache__/*
+/apps/core/migrations/*
+.env
+.env.*
