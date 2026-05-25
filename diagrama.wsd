@@ -1,0 +1,149 @@
+@startuml ModeloAppAcademia
+
+class Pessoa {
+ -nome: Char
+ -sobrenome: Char
+ -data_nascimento: Date
+ -email: Email
+ -endereco: Char
+ -telefone: Char
+ +login()
+ +logout()
+ +toString()
+}
+
+class Aluno {
+ -genero: CharChoices
+ -meta: Text
+ +toString()
+}
+
+class Plano {
+  -nome_plano: Char
+  -descricao: Char
+  -preco: Float
+  +toString()
+}
+
+class AlunoChecklistSaude {
+ -aluno: ForeignKey[Aluno]
+ -checklist_saude: ForeignKey[ChecklistSaude]
+}
+
+class ChecklistSaude {
+ -nome: Char
+ -aluno: ForeignKey[Aluno]
+ +toString()
+}
+
+class Personal {
+ -registroCREF: Char
+ -tipo_treinamento: CharChoices
+ +toString()
+}
+
+class FichaTreino {
+ -nome: Char
+ -descricao: Text
+ -criado_em: DateTime
+ -ativa: Boolean
+ -aluno: ForeignKey[Aluno]
+ -personal: ForeignKey[Personal]
+ +toString()
+}
+
+class DiaTreino {
+ -series: Integer
+ -repeticoes: Integer
+ -tempo_descanso: Integer
+ -observacao: Text
+ -exercicio: ForeignKey[Exercicio]
+ -ficha_treino: ForeignKey[FichaTreino]
+ +toString()
+}
+
+class Exercicio {
+ -nome: Char
+ -descricao: Text
+ -esta_ativo: Boolean
+ -grupo_muscular: ForeignKey[GrupoMuscular]
+ +toString()
+}
+
+class GrupoMuscular {
+ -nome: Char
+ -descricao: Text
+ +toString()
+}
+
+class Nutricionista {
+ -registroCRN: Char
+ -abordagem_nutricional: Char
+ +toString()
+}
+
+class PlanoAlimentar {
+ -nome: Char
+ -descricao: Text
+ -calorias_diarias: Float
+ -criado_em: DateTime
+ -ativo: Boolean
+ -aluno: ForeignKey[Aluno]
+ -nutricionista: ForeignKey[Nutricionista]
+ +toString()
+}
+
+class Refeicao {
+ -nome: Char
+ -horario: Time
+ -quantidade_gramas: Float
+ -descricao: Text
+ -alimento: ForeignKey[Alimento]
+ -plano_alimentar: ForeignKey[PlanoAlimentar]
+ +toString()
+}
+
+class Alimento {
+ -nome: Char
+ -descricao: Text
+ -calorias: Float
+ -proteinas: Float
+ -carboidratos: Float
+ -gorduras: Float
+ -categoria_alimento: ForeignKey[CategoriaAlimento]
+ +toString()
+}
+
+class CategoriaAlimento {
+ -nome: Char
+ -descricao: Text
+ +toString()
+}
+
+Aluno *--> FichaTreino : 0..n
+Aluno *--> Plano : 1..1
+Personal *--> FichaTreino : 0..n
+Aluno *--> AlunoChecklistSaude : 0..n
+ChecklistSaude *--> AlunoChecklistSaude : 0..n
+
+
+FichaTreino *--> DiaTreino : 1..n
+Exercicio *--> DiaTreino : 0..n
+
+Exercicio <--* GrupoMuscular : 1..n
+
+Aluno *--> PlanoAlimentar : 0..n
+Nutricionista *--> PlanoAlimentar : 0..n
+
+PlanoAlimentar *--> Refeicao : 1..n
+Alimento *--> Refeicao : 0..n
+
+Alimento <--* CategoriaAlimento : 1..n
+
+
+Aluno -up-|> Pessoa : 1..1
+Personal -up-|> Pessoa : 1..1
+Nutricionista -up-|> Pessoa : 1..1
+
+
+@enduml
