@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+
+{% block title %}
+  Adicionar Grupo Muscular - {{ block.super }}
+{% endblock %}
+
+{% block body %}
+  <br />
+  <b>Cadastro de Grupo Muscular</b>
+  <br />
+  <br />
+  <form action="" method="POST">
+    {% csrf_token %}
+    <label>Nome:</label>
+    <br />
+    {{ form.nome }}
+    <br />
+    <br />
+    <label>Descricao:</label>
+    <br />
+    {{ form.descricao }}
+    <br />
+    <br />
+    <button type="submit">Salvar</button>
+  </form>
+{% endblock %}

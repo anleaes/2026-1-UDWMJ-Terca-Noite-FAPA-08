@@ -1,0 +1,32 @@
+{% block body %}
+  <br />
+  <b>Lista de Categorias</b>
+  <br />
+  <br />
+  <table border="1">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Descricao</th>
+        <th></th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for grupo in grupos %}
+        <tr>
+          <th>{{ grupo.id }}</th>
+          <td>{{ grupo.nome }}</td>
+          <td>{{ grupo.descricao }}</td>
+          <td>
+            <a href="{% url 'grupo_uscular:edit_grupomuscular' grupo.id %}">Editar</a>
+          </td>
+          <td>
+            <a href="{% url 'grupo_muscular:delete_grupomuscular' grupo.id %}" >Excluir</a>
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% endblock %}
