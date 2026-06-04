@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'nutricionistas.apps.NutricionistasConfig',
     'gruposmusculares.apps.GruposmuscularesConfig',
     'exercicios.apps.ExerciciosConfig',
+    'planosalimentares.apps.PlanosalimentaresConfig',
 ]
 
 MIDDLEWARE = [
