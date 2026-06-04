@@ -27,6 +27,7 @@ urlpatterns = [
     path('exercicios/', include('exercicios.urls', namespace='exercicios')),
     path('planos-alimentares/', include('planosalimentares.urls', namespace='planosalimentares')),
     path('alimentos/', include('alimentos.urls', namespace='alimentos')),
+    path('categorias-alimentos/', include('categoriasalimentos.urls', namespace='categoriasalimentos')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
