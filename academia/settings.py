@@ -45,6 +45,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
+    'pessoas.apps.PessoasConfig',
+    'alunos.apps.AlunosConfig',
     'categoria_alimento.apps.CategoriaAlimentoConfig',
     'nutricionistas.apps.NutricionistasConfig',
     'gruposmusculares.apps.GruposmuscularesConfig',
