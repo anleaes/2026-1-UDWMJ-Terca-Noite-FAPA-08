@@ -23,6 +23,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls', namespace='core')),
     path('alunos/', include('alunos.urls', namespace='alunos')),
+    path('fichas-medicas/', include('fichasmedicas.urls', namespace='fichasmedicas')),
     path('nutricionistas/', include('nutricionistas.urls', namespace='nutricionistas')),
     path('grupos-musculares/', include('gruposmusculares.urls', namespace='gruposmusculares')),
     path('exercicios/', include('exercicios.urls', namespace='exercicios')),

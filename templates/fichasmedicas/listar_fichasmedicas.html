@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Lista de Ficha Medica - {{ block.super }}
+
+{% endblock title %}
+
+{% block body %}
+
+<br />
+<a href="{% url 'fichasmedicas:adicionar_fichamedica' %}">Cadastro de nova Ficha Medica</a>
+<br />
+<br />
+<b>Lista de Ficha Medica</b>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fichamedica in fichasmedicas %}
+        <tr>
+            <th>{{ fichamedica.id }}</th>
+            <td>{{ fichamedica.nome }}</td>
+            <td>{{ fichamedica.descricao }}</td>
+            <td>
+                <a href="{% url 'fichasmedicas:editar_fichamedica' fichamedica.id %}">Editar</a>
+            </td>
+            <td>
+                <a href="{% url 'fichasmedicas:deletar_fichamedica' fichamedica.id %}">Deletar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock body %}
