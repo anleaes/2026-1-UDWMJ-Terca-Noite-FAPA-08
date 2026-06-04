@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br />
+<b>Lista de Planos Alimentares</b>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome do Plano</th>
+            <th>Aluno</th>
+            <th>Nutricionista</th>
+            <th>Status</th>
+            <th>Data</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for planoalimentar in planosalimentares %}
+        <tr>
+            <td>{{ planoalimentar.id }}</td>
+            <td>{{ planoalimentar.nome }}</td>
+            <td>
+                {% if planoalimentar.aluno %}
+                {{ planoalimentar.aluno.nome }} {{ planoalimentar.aluno.sobrenome }}
+                {% endif %}
+            </td>
+            <td>
+                {% if planoalimentar.nutricionista %}
+                {{ planoalimentar.nutricionista.nome }} {{ planoalimentar.nutricionista.sobrenome }}
+                {% endif %}
+            </td>
+            <td>
+                {% if planoalimentar.esta_ativo %}
+                Ativo
+                {% else %}
+                Cancelado
+                {% endif %}
+            </td>
+            <td>{{ planoalimentar.criado_em }}</td>
+            <td>
+                <a href="{% url 'planosalimentares:ver_planoalimentar' planoalimentar.id %}">Ver Detalhes</a>
+                |
+                <a href="{% url 'planosalimentares:cancelar_planoalimentar' planoalimentar.id %}">Cancelar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">Nenhum plano alimentar encontrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

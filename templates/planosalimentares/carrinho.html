@@ -1,0 +1,71 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br />
+<a href="{% url 'planosalimentares:lista_refeicoes_alimentos' %}">Continuar montando plano alimentar</a>
+<br />
+<br />
+<b>Carrinho de Alimentos</b>
+<br />
+<br />
+{% if carrinho %}
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID Alimento</th>
+            <th>Nome</th>
+            <th>Refeição</th>
+            <th>Quantidade (g)</th>
+            <th>Observação</th>
+            <th></th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for alimento_id, item in carrinho.items %}
+        <tr>
+            <td>{{ alimento_id }}</td>
+            <td>{{ item.nome }}</td>
+
+            <form id="form-{{ alimento_id }}" method="post"
+                action="{% url 'planosalimentares:editar_carrinho' alimento_id %}">
+                {% csrf_token %}
+            </form>
+
+            <td>
+                <select form="form-{{ alimento_id }}" name="refeicao">
+                    <option value="1" {% if item.refeicao == '1' %}selected{% endif %}>Desjejum</option>
+                    <option value="2" {% if item.refeicao == '2' %}selected{% endif %}>Lanche da Manhã</option>
+                    <option value="3" {% if item.refeicao == '3' %}selected{% endif %}>Almoço</option>
+                    <option value="4" {% if item.refeicao == '4' %}selected{% endif %}>Lanche da Tarde</option>
+                    <option value="5" {% if item.refeicao == '5' %}selected{% endif %}>Jantar</option>
+                    <option value="6" {% if item.refeicao == '6' %}selected{% endif %}>Ceia</option>
+                </select>
+            </td>
+
+            <td>
+                <input form="form-{{ alimento_id }}" type="number" name="quantidade" value="{{ item.quantidade }}"
+                    min="1">
+            </td>
+
+            <td>
+                <input form="form-{{ alimento_id }}" type="text" name="observacao" value="{{ item.observacao }}">
+            </td>
+
+            <td>
+                <button form="form-{{ alimento_id }}" type="submit">Atualizar</button>
+            </td>
+
+            <td>
+                <a href="{% url 'planosalimentares:deletar_carrinho' alimento_id %}">Remover</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br />
+<a href="{% url 'planosalimentares:checkout' %}">Finalizar Pedido</a>
+{% else %}
+<p>Carrinho vazio.</p>
+{% endif %}
+{% endblock %}
