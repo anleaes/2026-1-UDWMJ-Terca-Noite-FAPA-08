@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'gruposmusculares.apps.GruposmuscularesConfig',
     'exercicios.apps.ExerciciosConfig',
     'planosalimentares.apps.PlanosalimentaresConfig',
+    'refeicoes.apps.RefeicoesConfig',
 ]
 
 MIDDLEWARE = [
