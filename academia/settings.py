@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'core.apps.CoreConfig',
     'categoria_alimento.apps.CategoriaAlimentoConfig',
     'gruposmusculares.apps.GruposmuscularesConfig',
+    'exercicios.apps.ExerciciosConfig',
 ]
 
 MIDDLEWARE = [
