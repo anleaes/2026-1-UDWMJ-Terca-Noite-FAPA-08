@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
     'categoria_alimento.apps.CategoriaAlimentoConfig',
+    'nutricionistas.apps.NutricionistasConfig',
 ]
 
 MIDDLEWARE = [
