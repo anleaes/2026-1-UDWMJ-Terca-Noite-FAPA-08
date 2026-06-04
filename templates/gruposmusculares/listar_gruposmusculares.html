@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Lista de Grupos Musculares - {{ block.super }}
+{% endblock %}
+
+{% block body %}
+<br />
+<b>Lista de Grupos Musculares</b>
+<br />
+
+<br />
+<a href="{% url 'gruposmusculares:adicionar_grupomuscular' %}">Cadastro de novo Grupo Muscular</a>
+<br />
+
+<br />
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descricao</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for grupomuscular in gruposmusculares %}
+        <tr>
+            <th>{{ grupomuscular.id }}</th>
+            <td>{{ grupomuscular.nome }}</td>
+            <td>{{ grupomuscular.descricao }}</td>
+            <td>
+                <a href="{% url 'gruposmusculares:editar_grupomuscular' grupomuscular.id %}">Editar</a>
+            </td>
+            <td>
+                <a href="{% url 'gruposmusculares:deletar_grupomuscular' grupomuscular.id %}">Deletar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
