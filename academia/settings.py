@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
     'categoria_alimento.apps.CategoriaAlimentoConfig',
+    'gruposmusculares.apps.GruposmuscularesConfig',
 ]
 
 MIDDLEWARE = [
