@@ -23,6 +23,8 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls', namespace='core')),
     path('nutricionistas/', include('nutricionistas.urls', namespace='nutricionistas')),
+    path('grupos-musculares/', include('gruposmusculares.urls', namespace='gruposmusculares')),
+    path('exercicios/', include('exercicios.urls', namespace='exercicios')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

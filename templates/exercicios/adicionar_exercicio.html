@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Adicionar Exercicio - {{ block.super }}
+
+{% endblock title %}
+
+{% block body %}
+
+<br />
+<b>Cadastro de Exercicio</b>
+<br />
+<br />
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+    <label>Nome</label>
+    <br />
+    {{ form.nome }}
+    <br />
+    <br />
+    <label>Descrição</label>
+    <br />
+    {{ form.descricao}}
+    <br />
+    <br />
+    <label>Ativar</label>
+    <br />
+    {{ form.esta_ativo }}
+    <br />
+    <br />
+    <label>Foto</label>
+    <br />
+    {{ form.foto }}
+    <br />
+    <br />
+    <label>Grupo Muscular</label>
+    <br />
+    {{ form.grupomuscular }}
+    <br />
+    <br />
+    <button type="submit">Salvar</button>
+</form>
+
+{% endblock body %}
