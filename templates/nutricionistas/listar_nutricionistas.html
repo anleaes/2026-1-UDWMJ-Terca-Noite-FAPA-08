@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Lista de Nutricionistas - {{ block.super }}
+
+{% endblock title %}
+
+{% block body %}
+
+<br />
+<a href="{% url 'nutricionistas:adicionar_nutricionista' %}">Cadastro de novo Nutricionista</a>
+<br />
+<br />
+<b>Lista de Nutricionistas</b></h5>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>Endereco</th>
+            <th>Telefone</th>
+            <th>E-mail</th>
+            <th>Registro CRN</th>
+            <th>Abordagem Nutricional</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for nutricionista in nutricionistas %}
+        <tr>
+            <td>{{ nutricionista.id }}</td>
+            <td>{{ nutricionista.nome }}</td>
+            <td>{{ nutricionista.sobrenome }}</td>
+            <td>{{ nutricionista.endereco }}</td>
+            <td>{{ nutricionista.telefone }}</td>
+            <td>{{ nutricionista.email }}</td>
+            <td>{{ nutricionista.registroCRN }}</td>
+            <td>{{ nutricionista.abordagem_nutricional }}</td>
+            <td>
+                <a href="{% url 'nutricionistas:editar_nutricionista' nutricionista.id %}">Editar</a>
+            </td>
+            <td>
+                <a href="{% url 'nutricionistas:deletar_nutricionista' nutricionista.id %}">Deletar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock body %}
