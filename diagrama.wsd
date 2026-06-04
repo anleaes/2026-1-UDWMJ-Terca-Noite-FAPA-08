@@ -15,28 +15,34 @@ class Pessoa {
 class Aluno {
  -genero: CharChoices
  -meta: Text
+ -fichaMedica: ManyToMany[FichaMedica]
  +toString()
 }
 
-class Plano {
-  -nome_plano: Char
-  -descricao: Char
-  -preco: Float
-  +toString()
+class AvaliacaoFisica {
+ -peso: Float
+ -altura: Float
+ -percentual_gordura: Float
+ -massa_magra: Float
+ -imc: Float
+ -data_avaliacao: Date
+ -aluno: OneToOne[Aluno]
+ +calcular_imc()
+ +toString()
 }
 
-class AlunoChecklistSaude {
+class AlunoFichaMedica {
  -aluno: ForeignKey[Aluno]
- -checklist_saude: ForeignKey[ChecklistSaude]
+ -fichaMedica: ForeignKey[FichaMedica]
 }
 
-class ChecklistSaude {
+class FichaMedica {
  -nome: Char
- -aluno: ForeignKey[Aluno]
+ -descricao: Text
  +toString()
 }
 
-class Personal {
+class Treinador {
  -registroCREF: Char
  -tipo_treinamento: CharChoices
  +toString()
@@ -48,14 +54,15 @@ class FichaTreino {
  -criado_em: DateTime
  -ativa: Boolean
  -aluno: ForeignKey[Aluno]
- -personal: ForeignKey[Personal]
+ -treinador: ForeignKey[Treinador]
  +toString()
 }
 
 class DiaTreino {
- -series: Integer
- -repeticoes: Integer
- -tempo_descanso: Integer
+  -dia_treino: CharChoices
+ -serie: Integer
+ -repeticao: Integer
+ -intervalo: Integer
  -observacao: Text
  -exercicio: ForeignKey[Exercicio]
  -ficha_treino: ForeignKey[FichaTreino]
@@ -66,6 +73,7 @@ class Exercicio {
  -nome: Char
  -descricao: Text
  -esta_ativo: Boolean
+ -foto: ImageField
  -grupo_muscular: ForeignKey[GrupoMuscular]
  +toString()
 }
@@ -100,16 +108,22 @@ class Refeicao {
  -descricao: Text
  -alimento: ForeignKey[Alimento]
  -plano_alimentar: ForeignKey[PlanoAlimentar]
+ +total_proteinas()
+ +total_carboidratos()
+ +total_calorias()
  +toString()
 }
 
 class Alimento {
  -nome: Char
  -descricao: Text
+ -porcao_referencia_gramas: Float
  -calorias: Float
  -proteinas: Float
  -carboidratos: Float
  -gorduras: Float
+ -esta_ativo: Boolean
+ -foto: ImageField
  -categoria_alimento: ForeignKey[CategoriaAlimento]
  +toString()
 }
@@ -120,12 +134,12 @@ class CategoriaAlimento {
  +toString()
 }
 
+' Relacionamentos
+Aluno "1" -- "1" AvaliacaoFisica : possui
 Aluno *--> FichaTreino : 0..n
-Aluno *--> Plano : 1..1
-Personal *--> FichaTreino : 0..n
-Aluno *--> AlunoChecklistSaude : 0..n
-ChecklistSaude *--> AlunoChecklistSaude : 0..n
-
+Treinador *--> FichaTreino : 0..n
+Aluno *--> AlunoFichaMedica : 0..n
+FichaMedica *--> AlunoFichaMedica : 0..n
 
 FichaTreino *--> DiaTreino : 1..n
 Exercicio *--> DiaTreino : 0..n
@@ -140,10 +154,8 @@ Alimento *--> Refeicao : 0..n
 
 Alimento <--* CategoriaAlimento : 1..n
 
-
 Aluno -up-|> Pessoa : 1..1
-Personal -up-|> Pessoa : 1..1
+Treinador -up-|> Pessoa : 1..1
 Nutricionista -up-|> Pessoa : 1..1
-
 
 @enduml
