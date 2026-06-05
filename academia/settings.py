@@ -48,6 +48,9 @@ INSTALLED_APPS = [
     'categoria_alimento.apps.CategoriaAlimentoConfig',
     'gruposmusculares.apps.GruposmuscularesConfig',
     'exercicios.apps.ExerciciosConfig',
+    'diastreinos.apps.DiastreinosConfig',
+    'fichastreinos.apps.FichastreinosConfig',
+    'treinadores.apps.TreinadoresConfig',
 ]
 
 MIDDLEWARE = [

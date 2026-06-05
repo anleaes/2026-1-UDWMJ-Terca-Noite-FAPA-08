@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br />
+<b>Lista de Fichas de Treino</b>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Aluno</th>
+            <th>Treinador</th>
+            <th>Status</th>
+            <th>Data</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for fichatreino in fichastreinos %}
+        <tr>
+            <td>{{ fichatreino.id }}</td>
+            <td>
+                {% if fichatreino.aluno %}
+                {{ fichatreino.aluno.nome }} {{ fichatreino.aluno.sobrenome }}
+                {% endif %}
+            </td>
+            <td>
+                {% if fichatreino.treinador %}
+                {{ fichatreino.treinador.nome }} {{ fichatreino.treinador.sobrenome }}
+                {% endif %}
+            </td>
+            <td>{{ fichatreino.esta_ativo }}</td>
+            <td>{{ fichatreino.criado_em }}</td>
+            <td>
+                <a href="{% url 'fichastreinos:ver_fichatreino' fichatreino.id %}">Ver</a>
+                |
+                <a href="{% url 'fichastreinos:cancelar_fichatreino' fichatreino.id %}">Cancelar</a>
+            </td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="7">Nenhuma ficha de treino encontrada.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

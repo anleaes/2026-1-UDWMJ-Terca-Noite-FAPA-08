@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Lista de Personal - {{ block.super }}
+
+{% endblock title %}
+
+{% block body %}
+
+<br />
+<a href="{% url 'treinadores:adicionar_treinador' %}">Cadastro de novo Personal</a>
+<br />
+<br />
+<b>Lista de Personal</b></h5>
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Sobrenome</th>
+            <th>Endereco</th>
+            <th>Telefone</th>
+            <th>E-mail</th>
+            <th>Registro CREF</th>
+            <th>Tipo de Treinamento</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for treinador in treinadores %}
+        <tr>
+            <td>{{ treinador.id }}</td>
+            <td>{{ treinador.nome }}</td>
+            <td>{{ treinador.sobrenome }}</td>
+            <td>{{ treinador.endereco }}</td>
+            <td>{{ treinador.telefone }}</td>
+            <td>{{ treinador.email }}</td>
+            <td>{{ treinador.registroCREF }}</td>
+            <td>{{ treinador.tipo_treinamento }}</td>
+            <td>
+                <a href="{% url 'treinadores:editar_treinador' treinador.id %}">Editar</a>
+            </td>
+            <td>
+                <a href="{% url 'treinadores:deletar_treinador' treinador.id %}">Deletar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+
+{% endblock body %}

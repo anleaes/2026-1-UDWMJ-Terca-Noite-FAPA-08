@@ -24,6 +24,8 @@ urlpatterns = [
     path('', include('core.urls', namespace='core')),
     path('grupos-musculares/', include('gruposmusculares.urls', namespace='gruposmusculares')),
     path('exercicios/', include('exercicios.urls', namespace='exercicios')),
+    path('fichas-treinos/', include('fichastreinos.urls', namespace='fichastreinos')),
+    path('treinadores/', include('treinadores.urls', namespace='treinadores')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
