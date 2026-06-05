@@ -33,6 +33,7 @@ urlpatterns = [
     path('alimentos/', include('alimentos.urls', namespace='alimentos')),
     path('categorias-alimentos/', include('categoriasalimentos.urls', namespace='categoriasalimentos')),
     path('avaliacoes-fisicas/', include('avaliacoesfisicas.urls', namespace='avaliacoesfisicas')),
+    path('contas/', include('contas.urls', namespace='contas')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
