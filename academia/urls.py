@@ -22,10 +22,16 @@ from django.conf import settings
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('core.urls', namespace='core')),
+    path('alunos/', include('alunos.urls', namespace='alunos')),
+    path('fichas-medicas/', include('fichasmedicas.urls', namespace='fichasmedicas')),
+    path('nutricionistas/', include('nutricionistas.urls', namespace='nutricionistas')),
     path('grupos-musculares/', include('gruposmusculares.urls', namespace='gruposmusculares')),
     path('exercicios/', include('exercicios.urls', namespace='exercicios')),
     path('fichas-treinos/', include('fichastreinos.urls', namespace='fichastreinos')),
     path('treinadores/', include('treinadores.urls', namespace='treinadores')),
+    path('planos-alimentares/', include('planosalimentares.urls', namespace='planosalimentares')),
+    path('alimentos/', include('alimentos.urls', namespace='alimentos')),
+    path('categorias-alimentos/', include('categoriasalimentos.urls', namespace='categoriasalimentos')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

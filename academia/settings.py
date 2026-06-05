@@ -45,12 +45,20 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'core.apps.CoreConfig',
+    'pessoas.apps.PessoasConfig',
+    'alunos.apps.AlunosConfig',
+    'fichasmedicas.apps.FichasmedicasConfig',
     'categoria_alimento.apps.CategoriaAlimentoConfig',
+    'nutricionistas.apps.NutricionistasConfig',
     'gruposmusculares.apps.GruposmuscularesConfig',
     'exercicios.apps.ExerciciosConfig',
     'diastreinos.apps.DiastreinosConfig',
     'fichastreinos.apps.FichastreinosConfig',
     'treinadores.apps.TreinadoresConfig',
+    'planosalimentares.apps.PlanosalimentaresConfig',
+    'refeicoes.apps.RefeicoesConfig',
+    'alimentos.apps.AlimentosConfig',
+    'categoriasalimentos.apps.CategoriasalimentosConfig',
 ]
 
 MIDDLEWARE = [

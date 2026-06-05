@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Adicionar Alimento - {{ block.super }}
+{% endblock title %}
+
+{% block body %}
+
+<br />
+<b>Cadastro de Alimento</b>
+<br />
+<br />
+<form action="" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <label>Nome</label>
+    <br />
+    {{ form.nome }}
+    <br />
+    <br />
+
+    <label>Descrição</label>
+    <br />
+    {{ form.descricao}}
+    <br />
+    <br />
+
+    <label>Porção de Referência (g/ml)</label>
+    <br />
+    {{ form.porcao_referencia_gramas }}
+    <br />
+    <br />
+
+    <label>Calorias (kcal)</label>
+    <br />
+    {{ form.calorias }}
+    <br />
+    <br />
+
+    <label>Proteína (g)</label>
+    <br />
+    {{ form.proteina }}
+    <br />
+    <br />
+
+    <label>Carboidrato (g)</label>
+    <br />
+    {{ form.carboidrato }}
+    <br />
+    <br />
+
+    <label>Gordura (g)</label>
+    <br />
+    {{ form.gordura }}
+    <br />
+    <br />
+    <label>Ativar</label>
+    <br />
+    {{ form.esta_ativo }}
+    <br />
+    <br />
+
+    <label>Foto</label>
+    <br />
+    {{ form.foto }}
+    <br />
+    <br />
+
+    <label>Categoria de Alimento</label>
+    <br />
+    {{ form.categoriaalimento }}
+    <br />
+    <br />
+
+    <button type="submit">Salvar</button>
+</form>
+
+{% endblock body %}

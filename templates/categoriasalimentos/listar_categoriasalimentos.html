@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block title %}
+Lista de Categoria de Alimentos - {{ block.super }}
+{% endblock %}
+
+{% block body %}
+<br />
+<b>Lista de Categoria de Alimentos</b>
+<br />
+
+<br />
+<a href="{% url 'categoriasalimentos:adicionar_categoriaalimento' %}">Cadastro de novo Categoria de Alimento</a>
+<br />
+
+<br />
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Descricao</th>
+            <th></th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for categoriaalimento in categoriasalimentos %}
+        <tr>
+            <th>{{ categoriaalimento.id }}</th>
+            <td>{{ categoriaalimento.nome }}</td>
+            <td>{{ categoriaalimento.descricao }}</td>
+            <td>
+                <a href="{% url 'categoriasalimentos:editar_categoriaalimento' categoriaalimento.id %}">Editar</a>
+            </td>
+            <td>
+                <a href="{% url 'categoriasalimentos:deletar_categoriaalimento' categoriaalimento.id %}">Deletar</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

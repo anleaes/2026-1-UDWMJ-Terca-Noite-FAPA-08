@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Adicionar Nutricionista - {{ block.super }}
+
+{% endblock title %}
+
+{% block body %}
+
+<br />
+<b>Cadastro de Nutricionista</b>
+<br />
+<br />
+<form action="" method="POST">
+    {% csrf_token %}
+    <label>Nome</label>
+    <br />
+    {{ form.nome }}
+    <br />
+    <br />
+    <label>Sobrenome</label>
+    <br />
+    {{ form.sobrenome }}
+    <br />
+    <br />
+    <label>Data de Nascimento</label>
+    <br />
+    {{ form.data_nascimento }}
+    <br />
+    <br />
+    <label>Endereco</label>
+    <br />
+    {{ form.endereco }}
+    <br />
+    <br />
+    <label>Telefone</label>
+    <br />
+    {{ form.telefone }}
+    <br />
+    <br />
+    <label>E-mail</label>
+    <br />
+    {{ form.email}}
+    <br />
+    <br />
+    <label>Registro CRN</label>
+    <br />
+    {{ form.registroCRN}}
+    <br />
+    <br />
+    <label>Abordagem Nutricional</label>
+    <br />
+    {{ form.abordagem_nutricional}}
+    <br />
+    <br />
+    <button type="submit">Salvar</button>
+</form>
+
+{% endblock body %}

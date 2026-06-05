@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br />
+<b>Detalhes do Plano Alimentar</b>
+<br />
+<br />
+<b>ID:</b> {{ planoalimentar.id }}
+<br />
+<b>Nome do Plano:</b> {{ planoalimentar.nome }}
+<br />
+<b>Cliente:</b>
+{% if planoalimentar.aluno %}
+{{ planoalimentar.aluno.nome }} {{ planoalimentar.aluno.sobrenome }}
+{% endif %}
+<br />
+<b>Nutricionista:</b>
+{% if planoalimentar.nutricionista %}
+{{ planoalimentar.nutricionista.nome }} {{ planoalimentar.nutricionista.sobrenome }}
+{% endif %}
+<br />
+<b>Status:</b> {% if planoalimentar.esta_ativo %}Ativo{% else %}Cancelado{% endif %}
+<br />
+<br />
+<b>Refeições da Dieta</b>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Refeição</th>
+            <th>Alimento</th>
+            <th>Quantidade</th>
+            <th>Kcal</th>
+            <th>Proteínas (g)</th>
+            <th>Carbos (g)</th>
+            <th>Gorduras (g)</th>
+            <th>Observação</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>{{ item.get_dia_refeicao_display }}</td>
+
+            <td>
+                {% if item.alimento %}
+                {{ item.alimento.nome }}
+                {% endif %}
+            </td>
+
+            <td>{{ item.quantidade_gramas }}g</td>
+
+            <td>{{ item.total_calorias }}</td>
+            <td>{{ item.total_proteinas }}</td>
+            <td>{{ item.total_carboidratos }}</td>
+            <td>{{ item.total_gorduras }}</td>
+
+            <td>{{ item.observacao }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="8">Nenhum item encontrado nesta dieta.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br />
+<a href="{% url 'planosalimentares:listar_planosalimentares' %}">Voltar para a Lista</a>
+{% endblock %}
