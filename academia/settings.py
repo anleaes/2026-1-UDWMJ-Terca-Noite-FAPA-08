@@ -59,6 +59,8 @@ INSTALLED_APPS = [
     'alimentos.apps.AlimentosConfig',
     'categoriasalimentos.apps.CategoriasalimentosConfig',
     'avaliacoesfisicas.apps.AvaliacaofisicaConfig',
+    'contas.apps.ContasConfig',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
