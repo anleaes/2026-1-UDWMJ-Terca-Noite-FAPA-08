@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'refeicoes.apps.RefeicoesConfig',
     'alimentos.apps.AlimentosConfig',
     'categoriasalimentos.apps.CategoriasalimentosConfig',
+    'avaliacoesfisicas.apps.AvaliacaofisicaConfig',
 ]
 
 MIDDLEWARE = [

@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br />
+<b>Detalhes do Aluno</b>
+<br />
+<br />
+
+<b>ID do Aluno:</b> {{ aluno.id }}
+<br />
+<b>Nome Completo:</b> {{ aluno.nome }} {{ aluno.sobrenome }}
+<br />
+
+<b>Avaliação Física:</b>
+{% if aluno.avaliacaofisica %}
+    <a href="{% url 'avaliacoesfisicas:ver_avaliacaofisica' aluno.avaliacaofisica.id %}" target="_blank" rel="noopener noreferrer">
+        {{ aluno.avaliacaofisica.numero }}
+    </a>
+    
+Gerada em: {{ aluno.avaliacaofisica.data_avaliacao|date:"d/m/Y" }}
+{% else %}
+    <span style="color: red;">Não gerada</span>
+{% endif %}
+<br />
+
+<b>Ficha Médica:</b>
+{% if aluno.fichamedica.all %}
+    {% for ficha in aluno.fichamedica.all %}
+        <br />• Observação médica: {{ ficha.observacao|default:"Sem observações" }}
+    {% endfor %}
+{% else %}
+    Nenhuma registrada
+{% endif %}
+<br />
+<br />
+
+<a href="{% url 'alunos:listar_alunos' %}">Voltar para a Lista</a>
+{% endblock %}

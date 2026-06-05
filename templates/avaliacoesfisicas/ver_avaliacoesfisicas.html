@@ -1,0 +1,61 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{% static 'css/arquivo_com_estilos.css' %}">
+    <title>Avaliação Física - {{ avaliacaofisica.numero }}</title>
+</head>
+<body>
+<div class="invoice_container">
+    <h2 class="invoice_h2">AVALIAÇÃO FÍSICA</h2>
+    
+    <div class="invoice_box">
+        <b>Número do Registro:</b> {{ avaliacaofisica.numero }}<br>
+        <b>Data da Avaliação:</b> {{ avaliacaofisica.data_avaliacao|date:"d/m/Y" }}
+    </div>
+    
+    <div class="invoice_box">
+        <h3>Dados do Aluno</h3>
+        <b>Nome:</b> {{ aluno.nome }} {{ aluno.sobrenome }}<br>
+        </div>
+    
+    <div class="invoice_box">
+        <h3>Métricas Corporais</h3>
+        <table class="invoice_table">
+            <thead>
+                <tr>
+                    <th class="invoice_th">Indicador</th>
+                    <th class="invoice_th">Valor Registrado</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="invoice_td">Peso (kg)</td>
+                    <td class="invoice_td">{{ avaliacaofisica.peso|default:"Não informado" }}</td>
+                </tr>
+                <tr>
+                    <td class="invoice_td">Altura (m)</td>
+                    <td class="invoice_td">{{ avaliacaofisica.altura|default:"Não informado" }}</td>
+                </tr>
+                <tr>
+                    <td class="invoice_td">Percentual de Gordura (%)</td>
+                    <td class="invoice_td">{{ avaliacaofisica.percentual_gordura|default:"Não informado" }}%</td>
+                </tr>
+                <tr>
+                    <td class="invoice_td">Massa Magra (kg)</td>
+                    <td class="invoice_td">{{ avaliacaofisica.massa_magra|default:"Não informado" }}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    
+    <div class="invoice_box">
+        <b>IMC Calculado:</b> {{ avaliacaofisica.calcular_imc }}
+    </div>
+</div>
+</body>
+</html>

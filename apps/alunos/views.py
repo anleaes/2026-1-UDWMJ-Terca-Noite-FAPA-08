@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import AlunoForm
 from .models import Aluno, Fichamedica
+from avaliacoesfisicas.views import criar_avaliacaofisica_para_aluno
 
 # Create your views here.
 def adicionar_aluno(request):
@@ -9,9 +10,10 @@ def adicionar_aluno(request):
     if request.method == 'POST':
         form = AlunoForm(request.POST)
         if form.is_valid():
-            f = form.save(commit=False)
-            f.save()
+            aluno = form.save()
             form.save_m2m()
+            criar_avaliacaofisica_para_aluno(aluno)
+
             return redirect('alunos:listar_alunos')
     form = AlunoForm()
     context['form'] = form
