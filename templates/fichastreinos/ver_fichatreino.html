@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br />
+<b>Detalhes da Ficha de treino</b>
+<br />
+<br />
+<b>ID:</b> {{ fichatreino.id }}
+<br />
+<b>Cliente:</b>
+{% if fichatreino.aluno %}
+{{ fichatreino.aluno.nome }} {{ fichatreino.aluno.sobrenome }}
+{% endif %}
+<br />
+<b>Treinador:</b>
+{% if fichatreino.treinador %}
+{{ fichatreino.treinador.nome }} {{ fichatreino.treinador.sobrenome }}
+{% endif %}
+<br />
+<b>Status:</b> {{ fichatreino.esta_ativo }}
+<br />
+<br />
+<b>Itens da Ficha de Treino</b>
+<table border="1">
+    <thead>
+        <tr>
+            <th>Exercício</th>
+            <th>Séries</th>
+            <th>Repetições</th>
+            <th>Intervalo</th>
+            <th>Dia Treino</th>
+            <th>Observação</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for item in items %}
+        <tr>
+            <td>
+                {% if item.exercicio %}
+                {{ item.exercicio.nome }}
+                {% endif %}
+            </td>
+            <td>{{ item.serie }}</td>
+            <td>{{ item.repeticao }}</td>
+            <td>{{ item.intervalo }}</td>
+            <td>{{ item.dia_treino }}</td>
+            <td>{{ item.observacao }}</td>
+        </tr>
+        {% empty %}
+        <tr>
+            <td colspan="4">Nenhum item encontrado.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<br />
+<a href="{% url 'fichastreinos:listar_fichastreinos' %}">Voltar</a>
+{% endblock %}

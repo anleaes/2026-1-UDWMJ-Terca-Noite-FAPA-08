@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br />
+<b>Finalizar Ficha de Treino</b>
+<br />
+<br />
+{% if carrinho %}
+<form method="post">
+    {% csrf_token %}
+
+    <label>Nome da Ficha:</label>
+    <input type="text" name="nome" required placeholder="Ex: Treino Hipertrofia A">
+    <br />
+    <br />
+
+    <label>Descrição (Opcional):</label>
+    <input type="text" name="descricao">
+    <br />
+    <br />
+
+    <label>Ficha Ativa?</label>
+    <select name="esta_ativo" required>
+        <option value="True">Sim</option>
+        <option value="False">Não</option>
+    </select>
+    <br />
+    <br />
+    <label>Aluno:</label>
+    <select name="aluno" required>
+        <option value="">Selecione</option>
+        {% for aluno in alunos %}
+        <option value="{{ aluno.id }}">{{ aluno.nome }} {{ aluno.sobrenome }}</option>
+        {% endfor %}
+    </select>
+    <br />
+    <br />
+    <label>Treinador:</label>
+    <select name="treinador" required>
+        <option value="">Selecione</option>
+        {% for treinador in treinadores %}
+        <option value="{{ treinador.id }}">{{ treinador.nome }} {{ treinador.sobrenome }}</option>
+        {% endfor %}
+    </select>
+    <br />
+    <br />
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Dia</th>
+                <th>Exercício</th>
+                <th>Séries</th>
+                <th>Repetições</th>
+                <th>Intervalo</th>
+                <th>Observação</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for exercicio_id, item in carrinho.items %}
+            <tr>
+                <td>{{ item.dia_treino }}</td>
+                <td>{{ item.nome }}</td>
+                <td>{{ item.serie }}</td>
+                <td>{{ item.repeticao }}</td>
+                <td>{{ item.intervalo }}</td>
+                <td>{{ item.observacao }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <br />
+    <br />
+    <button type="submit">Confirmar Ficha</button>
+</form>
+{% else %}
+<b>Carrinho vazio.</b>
+{% endif %}
+{% endblock %}

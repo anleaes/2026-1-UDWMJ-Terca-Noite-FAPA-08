@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+
+{% block body %}
+<br />
+<a href="{% url 'fichastreinos:lista_treinos_exercicios' %}">Continuar montando treino</a>
+<br />
+<br />
+<b>Carrinho</b>
+<br />
+<br />
+{% if carrinho %}
+<table border="1">
+    <thead>
+        <tr>
+            <th>ID Produto</th>
+            <th>Nome</th>
+            <th>Dia (A-F)</th>
+            <th>Séries</th>
+            <th>Repetições</th>
+            <th>Intervalo</th>
+            <th>Observação</th>
+            <th></th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for exercicio_id, item in carrinho.items %}
+        <tr>
+            <td>{{ exercicio_id }}</td>
+            <td>{{ item.nome }}</td>
+
+            <form id="form-{{ exercicio_id }}" method="post"
+                action="{% url 'fichastreinos:editar_carrinho' exercicio_id %}">
+                {% csrf_token %}
+            </form>
+
+            <td>
+                <select form="form-{{ exercicio_id }}" name="dia_treino">
+                    <option value="A" {% if item.dia_treino == 'A' %}selected{% endif %}>Treino A</option>
+                    <option value="B" {% if item.dia_treino == 'B' %}selected{% endif %}>Treino B</option>
+                    <option value="C" {% if item.dia_treino == 'C' %}selected{% endif %}>Treino C</option>
+                    <option value="D" {% if item.dia_treino == 'D' %}selected{% endif %}>Treino D</option>
+                    <option value="E" {% if item.dia_treino == 'E' %}selected{% endif %}>Treino E</option>
+                    <option value="F" {% if item.dia_treino == 'F' %}selected{% endif %}>Treino F</option>
+                </select>
+            </td>
+
+            <td>
+                <input form="form-{{ exercicio_id }}" type="number" name="serie" value="{{ item.serie }}" min="1">
+            </td>
+            <td>
+                <input form="form-{{ exercicio_id }}" type="number" name="repeticao" value="{{ item.repeticao }}"
+                    min="1">
+            </td>
+            <td>
+                <input form="form-{{ exercicio_id }}" type="number" name="intervalo" value="{{ item.intervalo }}"
+                    min="1">
+            </td>
+            <td>
+                <input form="form-{{ exercicio_id }}" type="text" name="observacao" value="{{ item.observacao }}">
+            </td>
+            <td>
+                <button form="form-{{ exercicio_id }}" type="submit">Atualizar</button>
+            </td>
+            <td>
+                <a href="{% url 'fichastreinos:deletar_carrinho' exercicio_id %}">Remover</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<a href="{% url 'fichastreinos:checkout' %}">Finalizar Pedido</a>
+{% else %}
+<p>Carrinho vazio.</p>
+{% endif %}
+{% endblock %}

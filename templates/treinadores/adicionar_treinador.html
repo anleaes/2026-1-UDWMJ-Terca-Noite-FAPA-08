@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+
+{% block title %}
+
+Adicionar Treinador - {{ block.super }}
+
+{% endblock title %}
+
+{% block body %}
+
+<br />
+<b>Cadastro de Treinador</b>
+<br />
+<br />
+<form action="" method="POST">
+    {% csrf_token %}
+    <label>Nome</label>
+    <br />
+    {{ form.nome }}
+    <br />
+    <br />
+    <label>Sobrenome</label>
+    <br />
+    {{ form.sobrenome }}
+    <br />
+    <br />
+    <label>Data de Nascimento</label>
+    <br />
+    {{ form.data_nascimento }}
+    <br />
+    <br />
+    <label>Endereco</label>
+    <br />
+    {{ form.endereco }}
+    <br />
+    <br />
+    <label>Telefone</label>
+    <br />
+    {{ form.telefone }}
+    <br />
+    <br />
+    <label>E-mail</label>
+    <br />
+    {{ form.email}}
+    <br />
+    <br />
+    <label>Registro CREF</label>
+    <br />
+    {{ form.registroCREF}}
+    <br />
+    <br />
+    <label>Tipo de Treinamento</label>
+    <br />
+    {{ form.tipo_treinamento}}
+    <br />
+    <br />
+    <button type="submit">Salvar</button>
+</form>
+
+{% endblock body %}
