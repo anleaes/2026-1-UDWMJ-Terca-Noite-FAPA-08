@@ -1,12 +1,18 @@
-{% extends 'base.html' %}
+{% load static %}
+<!doctype html>
+<html lang="pt-br">
 
-{% block title %}
-Novo usuario - {{ block.super}}
-{% endblock title %}
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My hero Academy</title>
+    <link rel="stylesheet" href="{% static 'css/adicionar_ususario.css' %}">
+</head>
 
-{% block body %}
-
-<b>Novo usuario</b>
+<body>
+    <b>Novo usuario</b>
 <br />
 <br />
 <form action="" method="POST">
@@ -38,5 +44,6 @@ Novo usuario - {{ block.super}}
     <br />
     <button type="submit">Salvar</button>
 </form>
+</body>
 
-{% endblock body %}
+</html>
