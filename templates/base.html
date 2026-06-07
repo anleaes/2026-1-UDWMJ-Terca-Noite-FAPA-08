@@ -1,72 +1,120 @@
-{% load static %}
-{% load widget_tweaks %}
+{% load static %} {% load widget_tweaks %}
 
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
+        <head>
+                {% block extra_css %}{% endblock extra_css %}
+                <meta charset="UTF-8" />
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+                <title>{% block title %}My hero Academy{% endblock title %}</title>
+        </head>
 
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{% static 'css/arquivo_com_estilos.css' %}">
-    <title>{% block title %}Nome do meu App{% endblock title %}</title>
-</head>
+        <body class="core_body">
+                <form action="{% url 'alunos:pesquisar_alunos' %}" method="GET" class="search-form">
+                        <input
+                                name="query"
+                                type="text"
+                                placeholder="Sobrenome do aluno"
+                                aria-label="Buscar"
+                                class="search-input"
+                        />
+                        <button type="submit" class="search-button">Buscar</button>
+                </form>
 
-<body class="core_body">
-    <form action="{% url 'alunos:pesquisar_alunos' %}" method="GET">
-        <input name="query" type="text" placeholder="Sobrenome do aluno" aria-label="Buscar">
-        <button type="submit">Buscar</button>
-    </form>
+                <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                        <a href="{% url 'core:home' %}">
+                                <img src="{% static 'img/menu.png' %}" width="200" height="60"
+                        /></a>
+                        <br />
 
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a href="{% url 'core:home' %}"><img src="{% static 'img/menu.png' %}" width="200" height="60" /></a>
-        <br />
+                        {% if user.is_authenticated %}
+                        <div class="collapse navbar-collapse" id="navbarsExample05">
+                                <!-- Header do usuário -->
+                                <div class="user-header">
+                                        <strong class="user-name">{{ user.get_full_name|default:user.username }}</strong>
+                                </div>
 
-        {% if user.is_authenticated %}
-        <div class="collapse navbar-collapse" id="navbarsExample05">
-            <a href="#"><button>{{ user.get_full_name|default:user.username }}</button></a>
-            <br />
-            <br />
-
-
-
-            <!-- LISTA -->
-            <a href="{% url 'gruposmusculares:listar_gruposmusculares' %}"><button onclick="mudarCor()">Grupos
-                    Musculares</button></a>
-            <a href="{% url 'exercicios:listar_exercicios' %}"><button onclick="mudarCor()">Exercicios</button></a>
-            <a href="{% url 'fichasmedicas:listar_fichasmedicas' %}"><button onclick="mudarCor()">Fichas
-                    Medicas</button></a>
-            <a href="{% url 'treinadores:listar_treinadores' %}"><button onclick="mudarCor()">Treinadores</button></a>
-            <a href="{% url 'alunos:listar_alunos' %}"><button onclick="mudarCor()">Alunos</button></a>
-            <a href="{% url 'fichastreinos:listar_fichastreinos' %}"><button onclick="mudarCor()">Fichas de
-                    Treinos</button></a>
-            <a href="{% url 'fichastreinos:lista_treinos_exercicios' %}"><button onclick="mudarCor()">Montar
-                    Treinos</button></a>
-            <a href="{% url 'categoriasalimentos:listar_categoriasalimentos' %}"><button onclick="mudarCor()">Categorias
-                    de
-                    Alimentos</button></a>
-            <a href="{% url 'alimentos:listar_alimentos' %}"><button onclick="mudarCor()">Alimentos</button></a>
-            <a href="{% url 'nutricionistas:listar_nutricionistas' %}"><button
-                    onclick="mudarCor()">Nutricionistas</button></a>
-            <a href="{% url 'planosalimentares:listar_planosalimentares' %}"><button onclick="mudarCor()">Planos
-                    Alimentares</button></a>
-            <a href="{% url 'planosalimentares:lista_refeicoes_alimentos' %}"><button onclick="mudarCor()">Montar Plano
-                    Alimentar</button></a>
-
-            <a href="{% url 'contas:usuario_alterar_informacoes' user.username %}"><button>Conta</button></a>
-            <a href="{% url 'contas:usuario_alterar_senha' %}"><button>Trocar senha</button></a>
-            <a href="{% url 'contas:usuario_logout' %}"><button>Sair</button></a>
-            <br />
-
-            <br />
-        </div> {% endif %}
-    </nav>
-
-    {% block body %}
-
-    {% endblock body %}
-
-    <script src="{% static 'js/arquivo_com_javascript.js' %}"></script>
-</body>
-
+                                <!-- Grid de navegação principal -->
+                                <div class="nav-grid">
+                                        <!-- Seção: Treinos -->
+                                        <div class="nav-section">
+                                                <h3 class="section-title">Treinos</h3>
+                                                <div class="section-buttons">
+                                                        <a href="{% url 'gruposmusculares:listar_gruposmusculares' %}" class="button-link">
+                                                                <button>Grupos Musculares</button>
+                                                        </a>
+                                                        <a href="{% url 'exercicios:listar_exercicios' %}" class="button-link">
+                                                                <button>Exercícios</button>
+                                                        </a>
+                                                        <a href="{% url 'fichastreinos:listar_fichastreinos' %}" class="button-link">
+                                                                <button>Fichas de Treinos</button>
+                                                        </a>
+                                                        <a href="{% url 'fichastreinos:lista_treinos_exercicios' %}" class="button-link">
+                                                                <button>Montar Treinos</button>
+                                                        </a>
+                                                </div>
+                                        </div>
+                        
+                                        <!-- Seção: Alunos e Treinadores -->
+                                        <div class="nav-section">
+                                                <h3 class="section-title">Gestão</h3>
+                                                <div class="section-buttons">
+                                                        <a href="{% url 'alunos:listar_alunos' %}" class="button-link">
+                                                                <button>Alunos</button>
+                                                        </a>
+                                                        <a href="{% url 'treinadores:listar_treinadores' %}" class="button-link">
+                                                                <button>Treinadores</button>
+                                                        </a>
+                                                        <a href="{% url 'fichasmedicas:listar_fichasmedicas' %}" class="button-link">
+                                                                <button>Fichas Médicas</button>
+                                                        </a>
+                                                </div>
+                                        </div>
+                        
+                                        <!-- Seção: Nutrição -->
+                                        <div class="nav-section">
+                                                <h3 class="section-title">Nutrição</h3>
+                                                <div class="section-buttons">
+                                                        <a href="{% url 'categoriasalimentos:listar_categoriasalimentos' %}" class="button-link">
+                                                                <button>Categorias de Alimentos</button>
+                                                        </a>
+                                                        <a href="{% url 'alimentos:listar_alimentos' %}" class="button-link">
+                                                                <button>Alimentos</button>
+                                                        </a>
+                                                        <a href="{% url 'nutricionistas:listar_nutricionistas' %}" class="button-link">
+                                                                <button>Nutricionistas</button>
+                                                        </a>
+                                                        <a href="{% url 'planosalimentares:listar_planosalimentares' %}" class="button-link">
+                                                                <button>Planos Alimentares</button>
+                                                        </a>
+                                                        <a href="{% url 'planosalimentares:lista_refeicoes_alimentos' %}" class="button-link">
+                                                                <button>Montar Plano Alimentar</button>
+                                                        </a>
+                                                </div>
+                                        </div>
+                        
+                                        <!-- Seção: Configurações -->
+                                        <div class="nav-section">
+                                                <h3 class="section-title">Configurações</h3>
+                                                <div class="section-buttons">
+                                                        <a href="{% url 'contas:usuario_alterar_informacoes' user.username %}" class="button-link">
+                                                                <button>Minha Conta</button>
+                                                        </a>
+                                                        <a href="{% url 'contas:usuario_alterar_senha' %}" class="button-link">
+                                                                <button>Alterar Senha</button>
+                                                        </a>
+                                                        <a href="{% url 'contas:usuario_logout' %}" class="button-link">
+                                                                <button class="logout-btn">Sair</button>
+                                                        </a>
+                                                </div>
+                                        </div>
+                                </div>
+</div>
+                        {% endif %}
+                </nav>
+                <script src="{% static 'js/arquivo_com_javascript.js' %}"></script>
+                {% block body %} {% endblock body %}
+        </body>
 </html>

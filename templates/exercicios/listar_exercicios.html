@@ -1,58 +1,316 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
-
-Lista de Produtos - {{ block.super }}
-
+Lista de Exercícios - {{ block.super }}
 {% endblock title %}
 
+{% block extra_css %}
+<style>
+/* Estilos específicos para lista de exercícios */
+.page-header {
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.page-header h2 {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    font-size: 28px;
+    margin-bottom: 10px;
+}
+
+.page-subtitle {
+    font-size: 16px;
+    color: #666;
+    margin-top: 10px;
+}
+
+.btn-add {
+    display: inline-block;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+    border: none;
+    cursor: pointer;
+}
+
+.btn-add:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    color: white;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    margin-top: 20px;
+}
+
+.exercicio-table {
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.exercicio-table thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.exercicio-table th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.exercicio-table td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e1e5e9;
+    vertical-align: middle;
+}
+
+.exercicio-table tbody tr:hover {
+    background: #f8f9fa;
+}
+
+.status-ativo {
+    display: inline-block;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.status-inativo {
+    display: inline-block;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.foto-exercicio {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #e1e5e9;
+}
+
+.exercicio-table .action-buttons {
+    display: flex;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.exercicio-table a {
+    display: inline-block;
+    padding: 6px 12px;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 13px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.exercicio-table a:first-child {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+.exercicio-table a:last-child {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+    color: white;
+}
+
+.exercicio-table a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    background: white;
+    border-radius: 10px;
+}
+
+.empty-icon {
+    font-size: 64px;
+    margin-bottom: 20px;
+}
+
+.empty-state p {
+    font-size: 16px;
+    color: #666;
+}
+
+.empty-state .btn-add-empty {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.empty-state .btn-add-empty:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Responsividade */
+@media (max-width: 1024px) {
+    .exercicio-table th,
+    .exercicio-table td {
+        padding: 10px;
+    }
+    
+    .exercicio-table {
+        font-size: 14px;
+    }
+}
+
+@media (max-width: 768px) {
+    .exercicio-table th,
+    .exercicio-table td {
+        padding: 8px;
+    }
+    
+    .exercicio-table .action-buttons {
+        flex-direction: column;
+        gap: 5px;
+    }
+    
+    .exercicio-table a {
+        text-align: center;
+    }
+    
+    .btn-add {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .page-header h2 {
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .exercicio-table {
+        font-size: 12px;
+    }
+    
+    .exercicio-table th,
+    .exercicio-table td {
+        padding: 6px;
+    }
+    
+    .foto-exercicio {
+        width: 40px;
+        height: 40px;
+    }
+    
+    .status-ativo,
+    .status-inativo {
+        font-size: 10px;
+        padding: 2px 8px;
+    }
+}
+</style>
+{% endblock %}
+
 {% block body %}
+<div style="background: white; border-radius: 10px; padding: 20px; margin-top: 20px;">
+    <div class="page-header">
+        <h2>🏋️‍♂️ Lista de Exercícios</h2>
+        <p class="page-subtitle">Gerencie os exercícios da sua academia de forma eficiente</p>
+    </div>
 
-<br />
-<a href="{% url 'exercicios:adicionar_exercicio' %}">Cadastro de novo exercicio</a>
-<br />
-<br />
-<b>Lista de Exercicios</b>
-<table border="1">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Ativo</th>
-            <th>Foto</th>
-            <th>Grupo Muscular</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for exercicio in exercicios %}
-        <tr>
-            <td>{{ exercicio.id }}</th>
-            <td>{{ exercicio.nome }}</td>
-            <td>{{ exercicio.descricao }}</td>
-            <td>
-                {% if exercicio.esta_ativo == True %}
-                Ativo
-                {% endif %}
-                {% if exercicio.esta_ativo == False %}
-                Inativo
-                {% endif %}
-            </td>
-            <td>
-                <img src="{{ exercicio.foto.url }}" width="80">
-            </td>
-            <td>{{ exercicio.grupomuscular }}</td>
-            <td>
-                <a href="{% url 'exercicios:editar_exercicio' exercicio.id %}">Editar</a>
-            </td>
-            <td>
-                <a href="{% url 'exercicios:deletar_exercicio' exercicio.id %}">Deletar</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    <div style="text-align: center; margin-bottom: 20px;">
+        <a href="{% url 'exercicios:adicionar_exercicio' %}" class="btn-add">
+            ➕ Novo Exercício
+        </a>
+    </div>
 
+    <div class="table-wrapper">
+        {% if exercicios %}
+            <table class="exercicio-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Descrição</th>
+                        <th>Status</th>
+                        <th>Foto</th>
+                        <th>Grupo Muscular</th>
+                        <th colspan="2">Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for exercicio in exercicios %}
+                    <tr>
+                        <td>{{ exercicio.id }}</td>
+                        <td><strong>{{ exercicio.nome }}</strong></td>
+                        <td>{{ exercicio.descricao|truncatechars:50 }}</td>
+                        <td>
+                            {% if exercicio.esta_ativo %}
+                                <span class="status-ativo">✓ Ativo</span>
+                            {% else %}
+                                <span class="status-inativo">✗ Inativo</span>
+                            {% endif %}
+                        </td>
+                        <td>
+                            {% if exercicio.foto %}
+                                <img src="{{ exercicio.foto.url }}" class="foto-exercicio" alt="{{ exercicio.nome }}">
+                            {% else %}
+                                <span style="color: #999;">Sem foto</span>
+                            {% endif %}
+                        </td>
+                        <td>{{ exercicio.grupomuscular.nome|default:"Não definido" }}</td>
+                        <td class="action-buttons">
+                            <a href="{% url 'exercicios:editar_exercicio' exercicio.id %}">
+                                ✏️ Editar
+                            </a>
+                            <a href="{% url 'exercicios:deletar_exercicio' exercicio.id %}" 
+                               onclick="return confirm('Tem certeza que deseja deletar o exercício {{ exercicio.nome }}?')">
+                                🗑️ Deletar
+                            </a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        {% else %}
+            <div class="empty-state">
+                <div class="empty-icon">🏋️‍♂️</div>
+                <p>Nenhum exercício cadastrado ainda.</p>
+                <p style="font-size: 14px; margin-top: 10px;">Clique no botão acima para começar!</p>
+                <a href="{% url 'exercicios:adicionar_exercicio' %}" class="btn-add-empty">
+                    ➕ Cadastrar Primeiro Exercício
+                </a>
+            </div>
+        {% endif %}
+    </div>
+</div>
 {% endblock body %}
