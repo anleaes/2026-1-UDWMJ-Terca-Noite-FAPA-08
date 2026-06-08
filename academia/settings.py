@@ -61,6 +61,7 @@ INSTALLED_APPS = [
     'avaliacoesfisicas.apps.AvaliacaofisicaConfig',
     'contas.apps.ContasConfig',
     'widget_tweaks',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [

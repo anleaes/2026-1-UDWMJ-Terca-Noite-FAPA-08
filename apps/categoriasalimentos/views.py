@@ -2,6 +2,8 @@ from django.shortcuts import render, get_object_or_404, redirect
 from .forms import CategoriaalimentoForm
 from .models import Categoriaalimento
 from django.contrib.auth.decorators import login_required
+from rest_framework import viewsets
+from .serializer import CategoriaalimentoSerializer
 
 # Create your views here.
 @login_required(login_url='/contas/login/')
@@ -47,3 +49,7 @@ def deletar_categoriaalimento(request, id_categoriaalimento):
     categoriaalimento = Categoriaalimento.objects.get(id=id_categoriaalimento)
     categoriaalimento.delete()
     return redirect('categoriasalimentos:listar_categoriasalimentos')
+
+class CategoriaalimentoViewSet(viewsets.ModelViewSet):
+    queryset = Categoriaalimento.objects.all()
+    serializer_class = CategoriaalimentoSerializer
