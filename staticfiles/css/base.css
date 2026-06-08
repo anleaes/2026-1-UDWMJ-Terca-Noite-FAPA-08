@@ -1,123 +1,244 @@
-/* Estilos específicos para listagem de grupos musculares e outras páginas de listagem */
-.page-header {
-    text-align: center;
-    margin-bottom: 30px;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.page-subtitle {
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+}
+
+/* Container principal */
+.core_body {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Barra de pesquisa */
+.search-form {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    margin-bottom: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    display: flex;
+    gap: 10px;
+    max-width: 500px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px;
     font-size: 16px;
-    color: #666;
-    margin-top: 10px;
+    transition: all 0.3s ease;
+    outline: none;
 }
 
-.btn-add {
-    display: inline-block;
+.search-input:focus {
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.search-button {
     padding: 12px 24px;
     background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
     color: white;
-    text-decoration: none;
+    border: none;
     border-radius: 8px;
+    font-size: 16px;
     font-weight: 600;
+    cursor: pointer;
     transition: all 0.3s ease;
-    margin-bottom: 20px;
 }
 
-.btn-add:hover {
+.search-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
-    color: white;
 }
 
-.table-wrapper {
-    overflow-x: auto;
-    margin-top: 20px;
-}
-
-.grupo-table {
-    width: 100%;
-    background: white;
+/* Navegação */
+.navbar {
+    background: white !important;
     border-radius: 10px;
-    overflow: hidden;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    animation: fadeIn 0.5s ease;
 }
 
-.grupo-table thead {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
+.navbar-brand img {
+    max-width: 100%;
+    height: auto;
 }
 
-.grupo-table th {
-    padding: 15px;
-    text-align: left;
-    font-weight: 600;
-}
-
-.grupo-table td {
-    padding: 12px 15px;
-    border-bottom: 1px solid #e1e5e9;
-}
-
-.grupo-table tbody tr:hover {
-    background: #f8f9fa;
-}
-
-.grupo-table a {
-    display: inline-block;
-    padding: 6px 12px;
-    margin: 0 5px;
-    text-decoration: none;
-    border-radius: 5px;
-    font-size: 13px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-}
-
-.grupo-table a:first-of-type {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: white;
-}
-
-.grupo-table a:last-of-type {
-    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-    color: white;
-}
-
-.grupo-table a:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.2);
-}
-
-.empty-state {
+/* Header do usuário */
+.user-header {
     text-align: center;
-    padding: 60px 20px;
-    background: white;
-    border-radius: 10px;
-}
-
-.empty-icon {
-    font-size: 64px;
+    padding: 20px 0;
+    border-bottom: 2px solid #f0f0f0;
     margin-bottom: 20px;
 }
 
-.empty-state p {
-    font-size: 16px;
-    color: #666;
+.user-name {
+    font-size: 24px;
+    font-weight: 700;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    padding: 10px 20px;
+    display: inline-block;
 }
 
-/* Responsividade para tabelas */
+/* Grid de navegação */
+.nav-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+    padding: 10px 0;
+}
+
+/* Seções de navegação */
+.nav-section {
+    background: #f8f9fa;
+    border-radius: 10px;
+    padding: 20px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.nav-section:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.section-title {
+    font-size: 18px;
+    font-weight: 700;
+    color: #667eea;
+    margin-bottom: 15px;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #e1e5e9;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.section-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Botões */
+.button-link {
+    text-decoration: none;
+    display: block;
+}
+
+.button-link button {
+    width: 100%;
+    padding: 10px 15px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.button-link button:hover {
+    transform: translateX(5px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+}
+
+/* Botão Sair com cor diferenciada */
+.logout-btn {
+    background: linear-gradient(135deg, #fa709a 0%, #fee140 100%) !important;
+}
+
+/* Responsividade */
 @media (max-width: 768px) {
-    .grupo-table th,
-    .grupo-table td {
+    .core_body {
         padding: 10px;
     }
-    
-    .grupo-table a {
-        margin: 5px 0;
-        display: inline-block;
+
+    .nav-grid {
+        grid-template-columns: 1fr;
+        gap: 15px;
     }
-    
-    .btn-add {
+
+    .search-form {
+        flex-direction: column;
+        max-width: 100%;
+    }
+
+    .search-button {
         width: 100%;
-        text-align: center;
     }
+
+    .user-name {
+        font-size: 20px;
+    }
+
+    .nav-section {
+        padding: 15px;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 16px;
+    }
+
+    .button-link button {
+        font-size: 13px;
+        padding: 8px 12px;
+    }
+
+    .user-name {
+        font-size: 18px;
+    }
+}
+
+/* Scroll personalizado */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #764ba2;
+}
+
+/* Animações */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.nav-section {
+    animation: fadeIn 0.5s ease;
 }
