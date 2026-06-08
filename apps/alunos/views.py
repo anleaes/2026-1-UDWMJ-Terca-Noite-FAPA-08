@@ -14,7 +14,6 @@ def adicionar_aluno(request):
         if form.is_valid():
             aluno = form.save()
             form.save_m2m()
-            criar_avaliacaofisica_para_aluno(aluno)
 
             return redirect('alunos:listar_alunos')
     form = AlunoForm()
