@@ -4,9 +4,9 @@ from nutricionistas.models import Nutricionista
 
 # Create your models here.
 class Planoalimentar(models.Model):
-    criado_em = models.DateTimeField(auto_now_add=True)
     nome = models.CharField('Nome', max_length=20)
     descricao = models.TextField('Descricao', max_length=200)
+    criado_em = models.DateTimeField(auto_now_add=True)
     esta_ativo = models.BooleanField('Ativo', default=True)
     aluno = models.ForeignKey(Aluno, on_delete=models.CASCADE)
     nutricionista = models.ForeignKey(Nutricionista, on_delete=models.CASCADE)

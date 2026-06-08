@@ -3,7 +3,7 @@ from pessoas.models import Pessoa
 
 # Create your models here.
 class Treinador(Pessoa):
-    registroCREF = models.TextField('Registro CREF', max_length=100) 
+    registroCREF = models.CharField('Registro CREF', max_length=100) 
     tipo_treinamento = models.TextField('Tipo de Treinamento', max_length=100) 
 
     class Meta:

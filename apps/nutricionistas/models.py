@@ -3,7 +3,7 @@ from pessoas.models import Pessoa
 
 # Create your models here.
 class Nutricionista(Pessoa):
-    registroCRN = models.TextField('Registro CRN', max_length=100) 
+    registroCRN = models.CharField('Registro CRN', max_length=100) 
     abordagem_nutricional = models.TextField('Abordagem Nutricional', max_length=100) 
 
     class Meta:
