@@ -2,19 +2,43 @@
 
 <!doctype html>
 <html lang="pt-br">
-
-<head>
-        {% block extra_css %}{% endblock extra_css %}
-        <meta charset="UTF-8" />
-        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <link rel="stylesheet" href="{% static 'css/base.css' %}" />
-        <link rel="stylesheet" href="{% static 'css/grupo_muscular.css' %}" />
-        <link rel="stylesheet" href="{% static 'css/adicionar_grupomuscular.css' %}" />
-        <link rel="stylesheet" href="{% static 'css/exercicio.css' %}" />
-        <link rel="stylesheet" href="{% static 'css/add_exercicio.css' %}" />
-        <title>{% block title %}My hero Academy{% endblock title %}</title>
-</head>
+        <head>
+                                {% block extra_css %}{% endblock extra_css %}
+                <meta charset="UTF-8" />
+                <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+                <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+                <link rel="stylesheet" href="{% static 'css/base.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/grupo_muscular.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/adicionar_grupomuscular.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/exercicio.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/add_exercicio.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/lista_fichatreino.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/ver_fichatreino.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/carrinho.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/checkout.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/lista_treinos_exercicios.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/listar_alunos.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/adicionar_aluno.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/ver_alunos.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/listar_treinadores.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/adicionar_treinador.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/listar_fichasmedicas.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/adicionar_fichamedica.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/listar_categoriasalimentos.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/adicionar_categoriaalimento.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/listar_alimentos.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/adicionar_alimento.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/listar_nutricionistas.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/adicionar_nutricionista.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/listar_planosalimentares.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/ver_planoalimentar.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/lista_refeicoes_alimentos.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/checkoutnutricionista.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/carrinhonutricionista.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/usuario_alterar_informacoes.css' %}" />
+                <link rel="stylesheet" href="{% static 'css/usuario_alterar_senha.css' %}" />
+                <title>{% block title %}My hero Academy{% endblock title %}</title>
+        </head>
 
 <body class="core_body">
         <form action="{% url 'alunos:pesquisar_alunos' %}" method="GET" class="search-form">
