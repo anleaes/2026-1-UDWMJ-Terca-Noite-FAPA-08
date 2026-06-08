@@ -13,17 +13,17 @@ Trocar senha - {{ block.super}}
     {% csrf_token %}
     <label>Senha anterior</label>
     <br />
-    {{ form.senha_antiga }}
+    {{ form.old_password }}
     <br />
     <br />
     <label>Nova senha</label>
     <br />
-    {{ form.nova_senha }}
+    {{ form.new_password1 }}
     <br />
     <br />
     <label>Confirmar nova senha</label>
     <br />
-    {{ form.confirmacao_senha_nova }}
+    {{ form.new_password2 }}
     <br />
     <br />
     <button type="submit">Atualizar</button>

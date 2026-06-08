@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import GrupomuscularForm
 from .models import Grupomuscular
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='/contas/login/')
 def adicionar_grupomuscular(request):
     template_name = 'gruposmusculares/adicionar_grupomuscular.html'
     context = {}
@@ -17,6 +19,7 @@ def adicionar_grupomuscular(request):
     context['form'] = form
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def listar_gruposmusculares(request):
     template_name = 'gruposmusculares/listar_gruposmusculares.html'
     gruposmusculares = Grupomuscular.objects.filter()
@@ -25,6 +28,7 @@ def listar_gruposmusculares(request):
     }
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def editar_grupomuscular(request, id_grupomuscular):
     template_name = 'gruposmusculares/adicionar_grupomuscular.html'
     context ={}
@@ -38,6 +42,7 @@ def editar_grupomuscular(request, id_grupomuscular):
     context['form'] = form
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def deletar_grupomuscular(request, id_grupomuscular):
     grupomuscular = Grupomuscular.objects.get(id=id_grupomuscular)
     grupomuscular.delete()
