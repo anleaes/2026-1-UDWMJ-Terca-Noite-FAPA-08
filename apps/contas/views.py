@@ -3,33 +3,32 @@ from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import PasswordChangeForm
-from .forms import UsuarioForm, UsuarioMudarInformacoesForm
+from .forms import UsuarioForm, UsuarioAlterarInformacoesForm
 
 def adicionar_usuario(request):
     template_name = 'contas/adicionar_usuario.html'
     context = {}
-    if request.method == 'POST':
+    if request.method =='POST':
         form = UsuarioForm(request.POST)
         if form.is_valid():
             f = form.save(commit=False)
-            f.set_password(f.password) 
+            f.set_password(f.password)
             f.save()
             return redirect('contas:usuario_login')
         else:
             return redirect('contas:adicionar_usuario')
     form = UsuarioForm()
     context['form'] = form
-    return render(request, template_name, context)   
+    return render(request, template_name, context)
 
 def usuario_login(request):
     template_name = 'contas/usuario_login.html'
-    if request.method == 'POST':
-        usuario = request.POST.get('usuario')
+    if request.method =='POST':
+        nome_usuario = request.POST.get('usuario')
         senha = request.POST.get('senha')
-        # authenticate do Django ainda espera as chaves 'username' e 'password' internamente
-        user = authenticate(username=usuario, password=senha)
-        if user is not None:
-            login(request, user)
+        usuario = authenticate(username=nome_usuario, password=senha)
+        if usuario is not None:
+            login(request, usuario)
             return redirect(request.GET.get('next', '/'))
         else:
             return redirect('contas:usuario_login')
@@ -56,15 +55,17 @@ def usuario_alterar_senha(request):
     return render(request, template_name, context)
 
 @login_required(login_url='/contas/login/')
-def usuario_alterar_informacoes(request, usuario):
+def usuario_alterar_informacoes(request, username):
     template_name = 'contas/usuario_alterar_informacoes.html'
     context = {}
-    # O banco de dados do Django faz a busca pelo campo interno 'username'
-    user = User.objects.get(username=usuario)
+    usuario = User.objects.get(username=username)
     if request.method == 'POST':
-        form = UsuarioMudarInformacoesForm(request.POST, instance=user)
+        form = UsuarioAlterarInformacoesForm(request.POST, instance=usuario)
         if form.is_valid():
             form.save()
-    form = UsuarioMudarInformacoesForm(instance=user)
+            return redirect('/')
+    else:
+        form = UsuarioAlterarInformacoesForm(instance=usuario)
+    
     context['form'] = form
     return render(request, template_name, context)

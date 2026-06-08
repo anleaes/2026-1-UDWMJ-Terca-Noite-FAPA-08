@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import FichamedicaForm
 from .models import Fichamedica
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='/contas/login/')
 def adicionar_fichamedica(request):
     template_name = 'fichasmedicas/adicionar_fichamedica.html'
     context = {}
@@ -17,6 +19,7 @@ def adicionar_fichamedica(request):
     context['form'] = form
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def listar_fichasmedicas(request):
     template_name = 'fichasmedicas/listar_fichasmedicas.html'
     fichasmedicas = Fichamedica.objects.filter()
@@ -25,6 +28,7 @@ def listar_fichasmedicas(request):
     }
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def editar_fichamedica(request, id_fichamedica):
     template_name = 'fichasmedicas/adicionar_fichamedica.html'
     context ={}
@@ -38,6 +42,7 @@ def editar_fichamedica(request, id_fichamedica):
     context['form'] = form
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def deletar_fichamedica(request, id_fichamedica):
     fichamedica = Fichamedica.objects.get(id=id_fichamedica)
     fichamedica.delete()

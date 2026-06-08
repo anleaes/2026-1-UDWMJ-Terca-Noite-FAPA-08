@@ -4,27 +4,19 @@ from django.contrib.auth.models import User
 class UsuarioForm(forms.ModelForm):
     class Meta:
         model = User
-        # 1. Use os nomes de campo originais do Django em inglês
-        fields = ['first_name', 'last_name', 'username', 'password', 'email']
-        
-        # 2. Use 'labels' para traduzir o que vai aparecer no formulário HTML
+        fields = ['first_name', 'last_name', 'username', 'password' , 'email']
         labels = {
             'first_name': 'nome',
             'last_name': 'sobrenome',
-            'username': 'usuario',
+            'username': 'nome_usuario',
             'password': 'senha',
-            'email': 'email'
         }
 
-class UsuarioMudarInformacoesForm(forms.ModelForm):
+class UsuarioAlterarInformacoesForm(forms.ModelForm):
     class Meta:
         model = User
-        # 1. Use os nomes de campo originais do Django em inglês
-        fields = ['first_name', 'last_name','email']
-        
-        # 2. Use 'labels' para traduzir o que vai aparecer no formulário HTML
+        fields = ['first_name', 'last_name', 'email']
         labels = {
             'first_name': 'nome',
             'last_name': 'sobrenome',
-            'email': 'email'
         }

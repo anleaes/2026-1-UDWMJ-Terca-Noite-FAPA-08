@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import AlimentoForm
 from .models import Alimento
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='/contas/login/')
 def adicionar_alimento(request):
     template_name = 'alimentos/adicionar_alimento.html'
     context = {}
@@ -17,6 +19,7 @@ def adicionar_alimento(request):
     context['form'] = form
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def listar_alimentos(request):
     template_name = 'alimentos/listar_alimentos.html'
     alimentos = Alimento.objects.filter()
@@ -25,6 +28,7 @@ def listar_alimentos(request):
     }
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def editar_alimento(request, id_alimento):
     template_name = 'alimentos/adicionar_alimento.html'
     context ={}
@@ -38,6 +42,7 @@ def editar_alimento(request, id_alimento):
     context['form'] = form
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def deletar_alimento(request, id_alimento):
     alimento = Alimento.objects.get(id=id_alimento)
     alimento.delete()

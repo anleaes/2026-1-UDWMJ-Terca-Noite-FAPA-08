@@ -4,8 +4,10 @@ from diastreinos.models import Diatreino
 from exercicios.models import Exercicio
 from alunos.models import Aluno
 from treinadores.models import Treinador
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='/contas/login/')
 def listar_fichastreinos(request):
     template_name = 'fichastreinos/listar_fichastreinos.html'
     fichastreinos = Fichatreino.objects.select_related('aluno', 'treinador').all()
@@ -14,7 +16,7 @@ def listar_fichastreinos(request):
     }
     return render(request, template_name, context)
 
-
+@login_required(login_url='/contas/login/')
 def lista_treinos_exercicios(request):
     template_name = 'fichastreinos/lista_treinos_exercicios.html'
     exercicios = Exercicio.objects.filter(esta_ativo=True)
@@ -23,7 +25,7 @@ def lista_treinos_exercicios(request):
     }
     return render(request, template_name, context)
 
-
+@login_required(login_url='/contas/login/')
 def carrinho(request):
     template_name = 'fichastreinos/carrinho.html'
     carrinho = request.session.get('carrinho', {})
@@ -36,7 +38,7 @@ def carrinho(request):
     }
     return render(request, template_name, context)
 
-
+@login_required(login_url='/contas/login/')
 def adicionar_carrinho(request, exercicio_id):
     exercicio = get_object_or_404(Exercicio, id=exercicio_id)
     carrinho = request.session.get('carrinho', {})
@@ -57,7 +59,7 @@ def adicionar_carrinho(request, exercicio_id):
     request.session.modified = True
     return redirect('fichastreinos:carrinho')
 
-
+@login_required(login_url='/contas/login/')
 def editar_carrinho(request, exercicio_id):
     if request.method == 'POST':
         serie = int(request.POST.get('serie', 1))
@@ -80,7 +82,7 @@ def editar_carrinho(request, exercicio_id):
         request.session.modified = True
     return redirect('fichastreinos:carrinho')
 
-
+@login_required(login_url='/contas/login/')
 def deletar_carrinho(request, exercicio_id):
     carrinho = request.session.get('carrinho', {})
     pid = str(exercicio_id)
@@ -90,7 +92,7 @@ def deletar_carrinho(request, exercicio_id):
     request.session.modified = True
     return redirect('fichastreinos:carrinho')
 
-
+@login_required(login_url='/contas/login/')
 def checkout(request):
     template_name = 'fichastreinos/checkout.html'
     carrinho = request.session.get('carrinho', {})
@@ -139,7 +141,7 @@ def checkout(request):
     }
     return render(request, template_name, context)
 
-
+@login_required(login_url='/contas/login/')
 def cancelar_fichatreino(request, fichatreino_id):
     fichatreino = get_object_or_404(Fichatreino, id=fichatreino_id)
     if fichatreino.esta_ativo != False:
@@ -147,7 +149,7 @@ def cancelar_fichatreino(request, fichatreino_id):
         fichatreino.save()
     return redirect('fichastreinos:listar_fichastreinos')
 
-
+@login_required(login_url='/contas/login/')
 def ver_fichatreino(request, fichatreino_id):
     template_name = 'fichastreinos/ver_fichatreino.html'
     fichatreino = get_object_or_404(Fichatreino, id=fichatreino_id)
