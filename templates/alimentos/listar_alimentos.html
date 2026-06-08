@@ -1,72 +1,74 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 Lista de Alimentos - {{ block.super }}
 {% endblock title %}
 
 {% block body %}
-
-<br />
-<a href="{% url 'alimentos:adicionar_alimento' %}">Cadastro de novo alimento</a>
-<br />
-<br />
-<b>Lista de Alimentos</b>
-<table border="1">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Descrição</th>
-            <th>Porção (g/ml)</th>
-            <th>Kcal</th>
-            <th>Proteína (g)</th>
-            <th>Carbo (g)</th>
-            <th>Gordura (g)</th>
-            <th>Ativo</th>
-            <th>Foto</th>
-            <th>Categoria</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for alimento in alimentos %}
-        <tr>
-            <td>{{ alimento.id }}</td>
-            <td>{{ alimento.nome }}</td>
-            <td>{{ alimento.descricao }}</td>
-
-            <td>{{ alimento.porcao_referencia_gramas }}</td>
-            <td>{{ alimento.calorias }}</td>
-            <td>{{ alimento.proteina }}</td>
-            <td>{{ alimento.carboidrato }}</td>
-            <td>{{ alimento.gordura }}</td>
-
-            <td>
-                {% if alimento.esta_ativo == True %}
-                Ativo
-                {% endif %}
-                {% if alimento.esta_ativo == False %}
-                Inativo
-                {% endif %}
-            </td>
-            <td>
-                {% if alimento.foto %}
-                <img src="{{ alimento.foto.url }}" width="80">
-                {% else %}
-                Sem foto
-                {% endif %}
-            </td>
-            <td>{{ alimento.categoriaalimento }}</td>
-            <td>
-                <a href="{% url 'alimentos:editar_alimento' alimento.id %}">Editar</a>
-            </td>
-            <td>
-                <a href="{% url 'alimentos:deletar_alimento' alimento.id %}">Deletar</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
-
+<div class="container-lista">
+    <a href="{% url 'alimentos:adicionar_alimento' %}" class="link-adicionar">
+        ➕ Cadastro de novo alimento
+    </a>
+    
+    <b>🍎 Lista de Alimentos</b>
+    
+    <div class="table-wrapper">
+        <table border="0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descrição</th>
+                    <th>Porção (g/ml)</th>
+                    <th>Kcal</th>
+                    <th>Proteína (g)</th>
+                    <th>Carbo (g)</th>
+                    <th>Gordura (g)</th>
+                    <th>Ativo</th>
+                    <th>Foto</th>
+                    <th>Categoria</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for alimento in alimentos %}
+                <tr>
+                    <td>{{ alimento.id }}</td>
+                    <td>{{ alimento.nome }}</td>
+                    <td>{{ alimento.descricao }}</td>
+                    <td>{{ alimento.porcao_referencia_gramas }}</td>
+                    <td>{{ alimento.calorias }}</td>
+                    <td>{{ alimento.proteina }}</td>
+                    <td>{{ alimento.carboidrato }}</td>
+                    <td>{{ alimento.gordura }}</td>
+                    <td>
+                        {% if alimento.esta_ativo == True %}
+                        <span class="status-ativo">✓ Ativo</span>
+                        {% endif %}
+                        {% if alimento.esta_ativo == False %}
+                        <span class="status-inativo">✗ Inativo</span>
+                        {% endif %}
+                    </td>
+                    <td>
+                        {% if alimento.foto %}
+                        <img src="{{ alimento.foto.url }}" class="foto-alimento" alt="{{ alimento.nome }}">
+                        {% else %}
+                        Sem foto
+                        {% endif %}
+                    </td>
+                    <td>{{ alimento.categoriaalimento }}</td>
+                    <td>
+                        <a href="{% url 'alimentos:editar_alimento' alimento.id %}">Editar</a>
+                    </td>
+                    <td>
+                        <a href="{% url 'alimentos:deletar_alimento' alimento.id %}">Deletar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock body %}
