@@ -1,8 +1,10 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import NutricionistaForm
 from .models import Nutricionista
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='/contas/login/')
 def adicionar_nutricionista(request):
     template_name = 'nutricionistas/adicionar_nutricionista.html'
     context = {}
@@ -17,6 +19,7 @@ def adicionar_nutricionista(request):
     context['form'] = form
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def listar_nutricionistas(request):
     template_name = 'nutricionistas/listar_nutricionistas.html'
     nutricionistas = Nutricionista.objects.filter()
@@ -25,6 +28,7 @@ def listar_nutricionistas(request):
     }
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def editar_nutricionista(request, id_nutricionista):
     template_name = 'nutricionistas/adicionar_nutricionista.html'
     context ={}
@@ -38,6 +42,7 @@ def editar_nutricionista(request, id_nutricionista):
     context['form'] = form
     return render(request, template_name, context)
 
+@login_required(login_url='/contas/login/')
 def deletar_nutricionista(request, id_nutricionista):
     nutricionista = Nutricionista.objects.get(id=id_nutricionista)
     nutricionista.delete()

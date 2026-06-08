@@ -14,12 +14,12 @@ Novo usuario - {{ block.super}}
     {% csrf_token %}
     <label>Primerio nome</label>
     <br />
-    {{ form.nome }}
+    {{ form.first_name }}
     <br />
     <br />
     <label>Sobrenome</label>
     <br />
-    {{ form.sobrenome }}
+    {{ form.last_name }}
     <br />
     <br />
     <label>E-mail</label>
