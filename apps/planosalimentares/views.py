@@ -90,40 +90,79 @@ def deletar_carrinho(request, alimento_id):
 def checkout(request):
     template_name = 'planosalimentares/checkout.html'
     carrinho = request.session.get('carrinho', {})
+    
     if request.method == 'POST':
+        # Valida se o carrinho está vazio
+        if not carrinho:
+            from django.contrib import messages
+            messages.error(request, "Carrinho vazio. Adicione alimentos antes de finalizar.")
+            return redirect('planosalimentares:lista_refeicoes_alimentos')
+        
         aluno_id = request.POST.get('aluno')
         nutricionista_id = request.POST.get('nutricionista')
         nome = request.POST.get('nome')
         descricao = request.POST.get('descricao')
         esta_ativo = request.POST.get('esta_ativo')
+        
+        # Valida campos obrigatórios
+        if not all([aluno_id, nutricionista_id, nome]):
+            from django.contrib import messages
+            messages.error(request, "Preencha todos os campos obrigatórios.")
+            return redirect('planosalimentares:checkout')
+        
         aluno = get_object_or_404(Aluno, id=aluno_id)
         nutricionista = get_object_or_404(Nutricionista, id=nutricionista_id)
+        
+        # Cria o plano alimentar
         planoalimentar = Planoalimentar.objects.create(
             aluno=aluno,
             nutricionista=nutricionista,
             nome=nome,
             descricao=descricao,
-            esta_ativo=esta_ativo
+            esta_ativo=esta_ativo == 'on' or esta_ativo == 'True'  # Ajuste conforme seu formulário
         )
+        
+        # Processa cada item do carrinho
         for alimento_id, item in carrinho.items():
-            alimento = get_object_or_404(Alimento, id=alimento_id)
-            quantidade = int(item['quantidade'])
-            observacao = str(item['observacao'])
+            # PULA se o alimento_id for vazio ou None
+            if not alimento_id or alimento_id == '':
+                continue
+                
+            try:
+                # Tenta buscar o alimento
+                alimento = Alimento.objects.get(id=alimento_id)
+            except Alimento.DoesNotExist:
+                # Se o alimento não existe, pula e continua com os próximos
+                from django.contrib import messages
+                messages.warning(request, f"Alimento ID {alimento_id} não encontrado. Ignorando...")
+                continue
+            
+            quantidade = int(item.get('quantidade', 0))
+            observacao = str(item.get('observacao', ''))
             refeicao = str(item.get('refeicao', ''))
-            Refeicao.objects.create(
-                plano_alimentar=planoalimentar,
-                alimento=alimento,
-                quantidade_gramas=quantidade,
-                observacao=observacao,
-                dia_refeicao=refeicao
-            )
+            
+            # Só cria se quantidade for maior que zero
+            if quantidade > 0:
+                Refeicao.objects.create(
+                    plano_alimentar=planoalimentar,
+                    alimento=alimento,
+                    quantidade_gramas=quantidade,
+                    observacao=observacao,
+                    dia_refeicao=refeicao
+                )
+        
+        # Limpa o carrinho
         request.session['carrinho'] = {}
         request.session.modified = True
+        
+        from django.contrib import messages
+        messages.success(request, "Plano alimentar criado com sucesso!")
         return redirect('planosalimentares:listar_planosalimentares')
-
+    
+    # GET request - mostra o formulário
     alunos = Aluno.objects.all()
     nutricionistas = Nutricionista.objects.all()
-
+    
     context = {
         'carrinho': carrinho,
         'alunos': alunos,
