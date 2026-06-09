@@ -12,10 +12,10 @@ def adicionar_aluno(request):
     if request.method == 'POST':
         form = AlunoForm(request.POST)
         if form.is_valid():
-            aluno = form.save()
+            f = form.save(commit=False)
+            f.save()
             form.save_m2m()
-            criar_avaliacaofisica_para_aluno(aluno)
-
+            criar_avaliacaofisica_para_aluno(f)
             return redirect('alunos:listar_alunos')
     form = AlunoForm()
     context['form'] = form
