@@ -4,8 +4,10 @@ from refeicoes.models import Refeicao
 from alimentos.models import Alimento
 from nutricionistas.models import Nutricionista
 from alunos.models import Aluno
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
+@login_required(login_url='/contas/login/')
 def listar_planosalimentares(request):
     template_name = 'planosalimentares/listar_planosalimentares.html'
     planosalimentares = Planoalimentar.objects.select_related('aluno', 'nutricionista').all()
@@ -14,16 +16,16 @@ def listar_planosalimentares(request):
     }
     return render(request, template_name, context)
 
-
+@login_required(login_url='/contas/login/')
 def lista_refeicoes_alimentos(request):
     template_name = 'planosalimentares/lista_refeicoes_alimentos.html'
-    alimentos = Alimento.objects.filter(esta_ativo=True)
+    alimentos = Alimento.objects.extra(where=['esta_ativo = 1'])
     context = {
         'alimentos': alimentos,
     }
     return render(request, template_name, context)
 
-
+@login_required(login_url='/contas/login/')
 def carrinho(request):
     template_name = 'planosalimentares/carrinho.html'
     carrinho = request.session.get('carrinho', {})
@@ -36,7 +38,7 @@ def carrinho(request):
     }
     return render(request, template_name, context)
 
-
+@login_required(login_url='/contas/login/')
 def adicionar_carrinho(request, alimento_id):
     alimento = get_object_or_404(Alimento, id=alimento_id)
     carrinho = request.session.get('carrinho', {})
@@ -55,7 +57,7 @@ def adicionar_carrinho(request, alimento_id):
     request.session.modified = True
     return redirect('planosalimentares:carrinho')
 
-
+@login_required(login_url='/contas/login/')
 def editar_carrinho(request, alimento_id):
     if request.method == 'POST':
         quantidade = int(request.POST.get('quantidade', 1))
@@ -74,7 +76,7 @@ def editar_carrinho(request, alimento_id):
         request.session.modified = True
     return redirect('planosalimentares:carrinho')
 
-
+@login_required(login_url='/contas/login/')
 def deletar_carrinho(request, alimento_id):
     carrinho = request.session.get('carrinho', {})
     pid = str(alimento_id)
@@ -84,7 +86,7 @@ def deletar_carrinho(request, alimento_id):
     request.session.modified = True
     return redirect('planosalimentares:carrinho')
 
-
+@login_required(login_url='/contas/login/')
 def checkout(request):
     template_name = 'planosalimentares/checkout.html'
     carrinho = request.session.get('carrinho', {})
@@ -129,7 +131,7 @@ def checkout(request):
     }
     return render(request, template_name, context)
 
-
+@login_required(login_url='/contas/login/')
 def cancelar_planoalimentar(request, planoalimentar_id):
     planoalimentar = get_object_or_404(Planoalimentar, id=planoalimentar_id)
     if planoalimentar.esta_ativo != False:
@@ -137,7 +139,7 @@ def cancelar_planoalimentar(request, planoalimentar_id):
         planoalimentar.save()
     return redirect('planosalimentares:listar_planosalimentares')
 
-
+@login_required(login_url='/contas/login/')
 def ver_planoalimentar(request, planoalimentar_id):
     template_name = 'planosalimentares/ver_planoalimentar.html'
     planoalimentar = get_object_or_404(Planoalimentar, id=planoalimentar_id)

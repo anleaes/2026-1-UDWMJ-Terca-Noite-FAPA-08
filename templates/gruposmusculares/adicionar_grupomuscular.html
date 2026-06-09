@@ -1,26 +1,47 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 Adicionar Grupo Muscular - {{ block.super }}
 {% endblock %}
 
 {% block body %}
-<br />
-<b>Cadastro de Grupo Muscular</b>
-<br />
-<br />
-<form action="" method="POST">
-    {% csrf_token %}
-    <label>Nome:</label>
-    <br />
-    {{ form.nome }}
-    <br />
-    <br />
-    <label>Descrição:</label>
-    <br />
-    {{ form.descricao }}
-    <br />
-    <br />
-    <button type="submit">Salvar</button>
-</form>
+<div class="form-container">
+    <div class="form-title">
+        <h2>📝 Cadastro de Grupo Muscular</h2>
+        <p>Preencha as informações abaixo para cadastrar um novo grupo muscular</p>
+    </div>
+
+    <form action="" method="POST" class="grupo-form">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.nome.id_for_label }}">Nome do Grupo Muscular</label>
+            {{ form.nome }}
+            {% if form.nome.errors %}
+                <span class="error-message">{{ form.nome.errors }}</span>
+            {% endif %}
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.descricao.id_for_label }}">Descrição</label>
+            {{ form.descricao }}
+            {% if form.descricao.errors %}
+                <span class="error-message">{{ form.descricao.errors }}</span>
+            {% endif %}
+            <small style="color: #666; font-size: 12px; display: block; margin-top: 5px;">
+                💡 Descreva os principais músculos e funções deste grupo
+            </small>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-submit">
+                💾 Salvar Grupo Muscular
+            </button>
+            <a href="{% url 'gruposmusculares:listar_gruposmusculares' %}" class="btn-cancel">
+                ↩️ Cancelar
+            </a>
+        </div>
+    </form>
+</div>
 {% endblock %}

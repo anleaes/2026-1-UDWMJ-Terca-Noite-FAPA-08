@@ -1,43 +1,45 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 Lista de Categoria de Alimentos - {{ block.super }}
 {% endblock %}
 
 {% block body %}
-<br />
-<b>Lista de Categoria de Alimentos</b>
-<br />
+<div class="container-lista">
+    <b>🍽️ Lista de Categoria de Alimentos</b>
 
-<br />
-<a href="{% url 'categoriasalimentos:adicionar_categoriaalimento' %}">Cadastro de novo Categoria de Alimento</a>
-<br />
+    <a href="{% url 'categoriasalimentos:adicionar_categoriaalimento' %}" class="link-adicionar">
+        ➕ Cadastro de novo Categoria de Alimento
+    </a>
 
-<br />
-<table border="1">
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Descricao</th>
-            <th></th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-        {% for categoriaalimento in categoriasalimentos %}
-        <tr>
-            <th>{{ categoriaalimento.id }}</th>
-            <td>{{ categoriaalimento.nome }}</td>
-            <td>{{ categoriaalimento.descricao }}</td>
-            <td>
-                <a href="{% url 'categoriasalimentos:editar_categoriaalimento' categoriaalimento.id %}">Editar</a>
-            </td>
-            <td>
-                <a href="{% url 'categoriasalimentos:deletar_categoriaalimento' categoriaalimento.id %}">Deletar</a>
-            </td>
-        </tr>
-        {% endfor %}
-    </tbody>
-</table>
+    <div class="table-wrapper">
+        <table border="0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Descricao</th>
+                    <th></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for categoriaalimento in categoriasalimentos %}
+                <tr>
+                    <th>{{ categoriaalimento.id }}</th>
+                    <td>{{ categoriaalimento.nome }}</td>
+                    <td>{{ categoriaalimento.descricao }}</td>
+                    <td>
+                        <a href="{% url 'categoriasalimentos:editar_categoriaalimento' categoriaalimento.id %}">Editar</a>
+                    </td>
+                    <tr>
+                        <a href="{% url 'categoriasalimentos:deletar_categoriaalimento' categoriaalimento.id %}">Deletar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
 {% endblock %}

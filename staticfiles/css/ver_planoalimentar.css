@@ -1,0 +1,205 @@
+
+/* Estilos específicos para detalhes do plano alimentar */
+.container-detalhes {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+b {
+    color: #333;
+}
+
+.container-detalhes > b:first-of-type {
+    display: block;
+    text-align: center;
+    font-size: 24px;
+    margin: 20px 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.detalhes-info {
+    margin-bottom: 10px;
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+}
+
+.detalhes-info b {
+    display: inline-block;
+    min-width: 140px;
+    color: #667eea;
+    font-size: 14px;
+}
+
+.detalhes-info span {
+    color: #333;
+    font-size: 14px;
+}
+
+.status-ativo {
+    display: inline-block;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.status-cancelado {
+    display: inline-block;
+    padding: 4px 12px;
+    background: linear-gradient(135deg, #eb3349 0%, #f45c43 100%);
+    color: white;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+}
+
+.subtitulo {
+    display: block;
+    font-size: 20px;
+    margin: 30px 0 15px 0;
+    padding-bottom: 10px;
+    border-bottom: 2px solid #f0f0f0;
+    color: #667eea;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+table {
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    border-collapse: collapse;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e1e5e9;
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background: #f8f9fa;
+}
+
+.link-voltar {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 10px 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+.link-voltar:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    color: white;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-state td {
+    text-align: center;
+    color: #666;
+    font-size: 16px;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .container-detalhes {
+        padding: 15px;
+    }
+    
+    .container-detalhes > b:first-of-type {
+        font-size: 20px;
+    }
+    
+    .subtitulo {
+        font-size: 18px;
+    }
+    
+    .detalhes-info b {
+        min-width: 120px;
+        font-size: 13px;
+        display: block;
+        margin-bottom: 5px;
+    }
+    
+    .detalhes-info span {
+        font-size: 13px;
+        display: block;
+        margin-left: 0;
+    }
+    
+    th, td {
+        padding: 8px;
+        font-size: 12px;
+    }
+    
+    .link-voltar {
+        width: 100%;
+        text-align: center;
+        display: block;
+    }
+}
+
+@media (max-width: 480px) {
+    .container-detalhes {
+        padding: 10px;
+    }
+    
+    .container-detalhes > b:first-of-type {
+        font-size: 18px;
+    }
+    
+    .subtitulo {
+        font-size: 16px;
+    }
+    
+    .detalhes-info b {
+        min-width: 100px;
+        font-size: 12px;
+    }
+    
+    .detalhes-info span {
+        font-size: 12px;
+    }
+    
+    th, td {
+        padding: 6px;
+        font-size: 11px;
+    }
+}

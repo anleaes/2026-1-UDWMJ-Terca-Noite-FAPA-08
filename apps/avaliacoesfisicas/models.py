@@ -16,12 +16,12 @@ class Avaliacaofisica(models.Model):
     )
 
     class Meta:
-        verbose_name = 'Avaliacao física'
-        verbose_name_plural = 'Avaliações físicas'
+        verbose_name = 'Avaliação Física'
+        verbose_name_plural = 'Avaliações Físicas'
         ordering = ['id']
 
-    def str__(self):
-        return f'Avaliação de {self.aluno}'
+    def __str__(self):
+        return f'{self.id} - {self.aluno}'
 
     @property
     def calcular_imc(self):

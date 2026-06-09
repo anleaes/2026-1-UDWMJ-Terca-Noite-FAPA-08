@@ -1,78 +1,102 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 Adicionar Alimento - {{ block.super }}
 {% endblock title %}
 
+
 {% block body %}
+<div class="container-form">
+    <b>🍎 Cadastro de Alimento</b>
+    
+    <form action="" method="POST" enctype="multipart/form-data" id="alimentoForm">
+        {% csrf_token %}
 
-<br />
-<b>Cadastro de Alimento</b>
-<br />
-<br />
-<form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
+        <label>Nome</label>
+        <br />
+        {{ form.nome }}
+        <br />
+        <br />
 
-    <label>Nome</label>
-    <br />
-    {{ form.nome }}
-    <br />
-    <br />
+        <label>Descrição</label>
+        <br />
+        {{ form.descricao }}
+        <br />
+        <br />
 
-    <label>Descrição</label>
-    <br />
-    {{ form.descricao}}
-    <br />
-    <br />
+        <label>Porção de Referência (g/ml)</label>
+        <br />
+        {{ form.porcao_referencia_gramas }}
+        <br />
+        <br />
 
-    <label>Porção de Referência (g/ml)</label>
-    <br />
-    {{ form.porcao_referencia_gramas }}
-    <br />
-    <br />
+        <label>Calorias (kcal)</label>
+        <br />
+        {{ form.calorias }}
+        <br />
+        <br />
 
-    <label>Calorias (kcal)</label>
-    <br />
-    {{ form.calorias }}
-    <br />
-    <br />
+        <label>Proteína (g)</label>
+        <br />
+        {{ form.proteina }}
+        <br />
+        <br />
 
-    <label>Proteína (g)</label>
-    <br />
-    {{ form.proteina }}
-    <br />
-    <br />
+        <label>Carboidrato (g)</label>
+        <br />
+        {{ form.carboidrato }}
+        <br />
+        <br />
 
-    <label>Carboidrato (g)</label>
-    <br />
-    {{ form.carboidrato }}
-    <br />
-    <br />
+        <label>Gordura (g)</label>
+        <br />
+        {{ form.gordura }}
+        <br />
+        <br />
+        
+        <label>Ativar</label>
+        <br />
+        {{ form.esta_ativo }}
+        <br />
+        <br />
 
-    <label>Gordura (g)</label>
-    <br />
-    {{ form.gordura }}
-    <br />
-    <br />
-    <label>Ativar</label>
-    <br />
-    {{ form.esta_ativo }}
-    <br />
-    <br />
+        <label>Foto</label>
+        <br />
+        {{ form.foto }}
+        <br />
+        <br />
 
-    <label>Foto</label>
-    <br />
-    {{ form.foto }}
-    <br />
-    <br />
+        <label>Categoria de Alimento</label>
+        <br />
+        {{ form.categoriaalimento }}
+        <br />
+        <br />
 
-    <label>Categoria de Alimento</label>
-    <br />
-    {{ form.categoriaalimento }}
-    <br />
-    <br />
+        <button type="submit">💾 Salvar</button>
+    </form>
+</div>
 
-    <button type="submit">Salvar</button>
-</form>
-
+<script>
+// Preview da foto antes de enviar
+const fotoInput = document.querySelector('input[type="file"]');
+if (fotoInput) {
+    fotoInput.addEventListener('change', function(event) {
+        if (event.target.files && event.target.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                let preview = document.querySelector('.photo-preview');
+                if (!preview) {
+                    preview = document.createElement('div');
+                    preview.className = 'photo-preview';
+                    fotoInput.parentNode.appendChild(preview);
+                }
+                preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+                preview.style.display = 'block';
+            }
+            reader.readAsDataURL(event.target.files[0]);
+        }
+    });
+}
+</script>
 {% endblock body %}

@@ -1,26 +1,30 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
 Adicionar Categoria de Alimento - {{ block.super }}
 {% endblock %}
 
 {% block body %}
-<br />
-<b>Cadastro de Categoria de Alimento</b>
-<br />
-<br />
-<form action="" method="POST">
-    {% csrf_token %}
-    <label>Nome:</label>
-    <br />
-    {{ form.nome }}
-    <br />
-    <br />
-    <label>Descrição:</label>
-    <br />
-    {{ form.descricao }}
-    <br />
-    <br />
-    <button type="submit">Salvar</button>
-</form>
+<div class="container-form">
+    <b>🍽️ Cadastro de Categoria de Alimento</b>
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+        
+        <label>Nome:</label>
+        <br />
+        {{ form.nome }}
+        <br />
+        <br />
+        
+        <label>Descrição:</label>
+        <br />
+        {{ form.descricao }}
+        <br />
+        <br />
+        
+        <button type="submit">💾 Salvar</button>
+    </form>
+</div>
 {% endblock %}

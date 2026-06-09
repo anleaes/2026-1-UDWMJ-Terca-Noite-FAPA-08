@@ -7,8 +7,6 @@ class Pessoa {
  -email: Email
  -endereco: Char
  -telefone: Char
- +login()
- +logout()
  +toString()
 }
 
@@ -44,7 +42,7 @@ class FichaMedica {
 
 class Treinador {
  -registroCREF: Char
- -tipo_treinamento: CharChoices
+ -tipo_treinamento: Text
  +toString()
 }
 
@@ -52,7 +50,7 @@ class FichaTreino {
  -nome: Char
  -descricao: Text
  -criado_em: DateTime
- -ativa: Boolean
+ -esta_ativo: Boolean
  -aluno: ForeignKey[Aluno]
  -treinador: ForeignKey[Treinador]
  +toString()
@@ -86,26 +84,24 @@ class GrupoMuscular {
 
 class Nutricionista {
  -registroCRN: Char
- -abordagem_nutricional: Char
+ -abordagem_nutricional: Text
  +toString()
 }
 
 class PlanoAlimentar {
  -nome: Char
  -descricao: Text
- -calorias_diarias: Float
  -criado_em: DateTime
- -ativo: Boolean
+ -esta_ativo: Boolean
  -aluno: ForeignKey[Aluno]
  -nutricionista: ForeignKey[Nutricionista]
  +toString()
 }
 
 class Refeicao {
- -nome: Char
- -horario: Time
+ -dia_refeicao: CharChoices
+ -observacao: Text
  -quantidade_gramas: Float
- -descricao: Text
  -alimento: ForeignKey[Alimento]
  -plano_alimentar: ForeignKey[PlanoAlimentar]
  +total_proteinas()

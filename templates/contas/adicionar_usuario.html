@@ -1,0 +1,49 @@
+{% load static %}
+<!doctype html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>My hero Academy</title>
+    <link rel="stylesheet" href="{% static 'css/adicionar_ususario.css' %}">
+</head>
+
+<body>
+    <b>Novo usuario</b>
+    <br />
+    <br />
+    <form action="" method="POST">
+        {% csrf_token %}
+        <label>Nome</label>
+        <br />
+        {{ form.first_name }}
+        <br />
+        <br />
+        <label>Sobrenome</label>
+        <br />
+        {{ form.last_name }}
+        <br />
+        <br />
+        <label>Nome de usuario</label>
+        <br />
+        {{ form.username }}
+        <br />
+        <br />
+        <label>E-mail</label>
+        <br />
+        {{ form.email }}
+        <br />
+        <br />
+        <label>Senha</label>
+        <br />
+        {{ form.password }}
+        <br />
+        <br />
+        <button type="submit">Salvar</button>
+    </form>
+</body>
+
+</html>

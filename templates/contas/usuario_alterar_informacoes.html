@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Novo usuário - {{ block.super }}
+{% endblock title %}
+
+{% block body %}
+<div class="container-form">
+    <p>👤 Alterar usuário</p>
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+        
+        <label>Primeiro nome</label>
+        <br />
+        {{ form.first_name }}
+        <br />
+        <br />
+        
+        <label>Sobrenome</label>
+        <br />
+        {{ form.last_name }}
+        <br />
+        <br />
+        
+        <label>E-mail</label>
+        <br />
+        {{ form.email }}
+        <br />
+        <br />
+        
+        <button type="submit">💾 Salvar</button>
+    </form>
+</div>
+{% endblock body %}

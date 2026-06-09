@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Trocar senha - {{ block.super }}
+{% endblock title %}
+
+
+{% block body %}
+<div class="container-form">
+    <p>🔒 Alterar Senha</p>
+    
+    <form action="" method="POST">
+        {% csrf_token %}
+        
+        <label>Senha anterior</label>
+        <br />
+        {{ form.old_password }}
+        <br />
+        <br />
+        
+        <label>Nova senha</label>
+        <br />
+        {{ form.new_password1 }}
+        <br />
+        <br />
+        
+        <label>Confirmar nova senha</label>
+        <br />
+        {{ form.new_password2 }}
+        <br />
+        <br />
+        
+        <button type="submit">🔑 Atualizar</button>
+    </form>
+</div>
+{% endblock body %}

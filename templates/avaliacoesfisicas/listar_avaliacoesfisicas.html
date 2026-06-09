@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Lista de Avaliações Físicas - {{ block.super }}
+{% endblock title %}
+
+{% block body %}
+<div class="container-lista">
+    <a href="{% url 'avaliacoesfisicas:adicionar_avaliacaofisica' %}" class="link-adicionar">
+        ➕ Nova Avaliação Física
+    </a>
+    
+    <b>📋 Lista de Avaliações Físicas</b>
+    
+    <div class="table-wrapper">
+        <table border="0">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Número</th>
+                    <th>Aluno</th>
+                    <th>Data da Avaliação</th>
+                    <th>Peso (kg)</th>
+                    <th>Altura (m)</th>
+                    <th>IMC</th>
+                    <th>Visualizar</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for avaliacao in avaliacoesfisicas %}
+                <tr>
+                    <td>{{ avaliacao.id }}</td>
+                    <td>{{ avaliacao.numero }}</td>
+                    <td>{{ avaliacao.aluno }}</td>
+                    <td>{{ avaliacao.data_avaliacao|date:"d/m/Y" }}</td>
+                    <td>{{ avaliacao.peso|default:"-" }}</td>
+                    <td>{{ avaliacao.altura|default:"-" }}</td>
+                    <td>{{ avaliacao.calcular_imc|default:"-" }}</td>
+                    <td>
+                        <a href="{% url 'avaliacoesfisicas:ver_avaliacaofisica' avaliacao.id %}" target="_blank">Visualizar</a>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</div>
+{% endblock body %}

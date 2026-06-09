@@ -1,0 +1,174 @@
+
+/* Estilos específicos para lista de alimentos disponíveis */
+.container-lista {
+    background: white;
+    border-radius: 10px;
+    padding: 20px;
+    margin-top: 20px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.link-carrinho {
+    display: inline-block;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    margin-bottom: 20px;
+}
+
+.link-carrinho:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+    color: white;
+}
+
+b {
+    display: block;
+    font-size: 24px;
+    margin: 20px 0;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+.table-wrapper {
+    overflow-x: auto;
+    margin: 20px 0;
+}
+
+table {
+    width: 100%;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    border-collapse: collapse;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+thead {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+}
+
+th {
+    padding: 15px;
+    text-align: left;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+td {
+    padding: 12px 15px;
+    border-bottom: 1px solid #e1e5e9;
+    vertical-align: middle;
+}
+
+tbody tr:hover {
+    background: #f8f9fa;
+}
+
+.foto-alimento {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+    border-radius: 8px;
+    border: 2px solid #e1e5e9;
+}
+
+td a {
+    display: inline-block;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+}
+
+td a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 3px 10px rgba(17, 153, 142, 0.4);
+    color: white;
+}
+
+.empty-state {
+    text-align: center;
+    padding: 60px 20px;
+}
+
+.empty-state td {
+    text-align: center;
+    color: #666;
+    font-size: 16px;
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+    th, td {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    .foto-alimento {
+        width: 40px;
+        height: 40px;
+    }
+    
+    td a {
+        padding: 6px 12px;
+        font-size: 11px;
+    }
+}
+
+@media (max-width: 768px) {
+    .container-lista {
+        padding: 15px;
+    }
+    
+    th, td {
+        padding: 8px;
+        font-size: 12px;
+    }
+    
+    b {
+        font-size: 20px;
+    }
+    
+    .link-carrinho {
+        width: 100%;
+        text-align: center;
+        display: block;
+    }
+    
+    .foto-alimento {
+        width: 35px;
+        height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    .container-lista {
+        padding: 10px;
+    }
+    
+    th, td {
+        padding: 6px;
+        font-size: 11px;
+    }
+    
+    b {
+        font-size: 18px;
+    }
+    
+    .foto-alimento {
+        width: 30px;
+        height: 30px;
+    }
+}

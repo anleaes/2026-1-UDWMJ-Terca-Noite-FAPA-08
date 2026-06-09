@@ -1,45 +1,82 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}
-
-Adicionar Exercicio - {{ block.super }}
-
+Adicionar Exercício - {{ block.super }}
 {% endblock title %}
 
 {% block body %}
+<div class="form-container">
+    <div class="form-title">
+        <h2>🏋️‍♂️ Cadastro de Exercício</h2>
+        <p>Preencha as informações abaixo para cadastrar um novo exercício</p>
+    </div>
 
-<br />
-<b>Cadastro de Exercicio</b>
-<br />
-<br />
-<form action="" method="POST" enctype="multipart/form-data">
-    {% csrf_token %}
-    <label>Nome</label>
-    <br />
-    {{ form.nome }}
-    <br />
-    <br />
-    <label>Descrição</label>
-    <br />
-    {{ form.descricao}}
-    <br />
-    <br />
-    <label>Ativar</label>
-    <br />
-    {{ form.esta_ativo }}
-    <br />
-    <br />
-    <label>Foto</label>
-    <br />
-    {{ form.foto }}
-    <br />
-    <br />
-    <label>Grupo Muscular</label>
-    <br />
-    {{ form.grupomuscular }}
-    <br />
-    <br />
-    <button type="submit">Salvar</button>
-</form>
+    <form action="" method="POST" enctype="multipart/form-data" class="exercicio-form" id="exercicioForm">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="{{ form.nome.id_for_label }}">
+                Nome do Exercício <span class="required">*</span>
+            </label>
+            {{ form.nome }}
+            {% if form.nome.errors %}
+                <span class="error-message">{{ form.nome.errors }}</span>
+            {% endif %}
+            <small class="help-text">💡 Ex: Supino Reto, Rosca Direta, Agachamento</small>
+        </div>
 
+        <div class="form-group">
+            <label for="{{ form.descricao.id_for_label }}">Descrição</label>
+            {{ form.descricao }}
+            {% if form.descricao.errors %}
+                <span class="error-message">{{ form.descricao.errors }}</span>
+            {% endif %}
+            <small class="help-text">💡 Descreva como executar o exercício corretamente</small>
+        </div>
+
+        <div class="form-group">
+            <label class="checkbox-label">
+                {{ form.esta_ativo }}
+                <span>Ativar exercício</span>
+            </label>
+            {% if form.esta_ativo.errors %}
+                <span class="error-message">{{ form.esta_ativo.errors }}</span>
+            {% endif %}
+            <small class="help-text">💡 Exercícios ativos aparecem nos treinos</small>
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.foto.id_for_label }}">Foto do Exercício</label>
+            {{ form.foto }}
+            {% if form.foto.errors %}
+                <span class="error-message">{{ form.foto.errors }}</span>
+            {% endif %}
+            <small class="help-text">💡 Formatos permitidos: JPG, PNG, GIF. Tamanho máximo: 5MB</small>
+            <div class="photo-preview" id="photoPreview">
+                <img id="previewImage" src="#" alt="Preview da foto">
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label for="{{ form.grupomuscular.id_for_label }}">
+                Grupo Muscular <span class="required">*</span>
+            </label>
+            {{ form.grupomuscular }}
+            {% if form.grupomuscular.errors %}
+                <span class="error-message">{{ form.grupomuscular.errors }}</span>
+            {% endif %}
+            <small class="help-text">💡 Selecione o grupo muscular principal que este exercício trabalha</small>
+        </div>
+
+        <div class="form-actions">
+            <button type="submit" class="btn-submit">
+                💾 Salvar Exercício
+            </button>
+            <a href="{% url 'exercicios:listar_exercicios' %}" class="btn-cancel">
+                ↩️ Cancelar
+            </a>
+        </div>
+    </form>
+</div>
 {% endblock body %}

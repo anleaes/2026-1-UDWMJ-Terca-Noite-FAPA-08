@@ -1,38 +1,61 @@
 {% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Detalhes do Aluno - {{ block.super }}
+{% endblock %}
+
 
 {% block body %}
-<br />
-<b>Detalhes do Aluno</b>
-<br />
-<br />
-
-<b>ID do Aluno:</b> {{ aluno.id }}
-<br />
-<b>Nome Completo:</b> {{ aluno.nome }} {{ aluno.sobrenome }}
-<br />
-
-<b>Avaliação Física:</b>
-{% if aluno.avaliacaofisica %}
-    <a href="{% url 'avaliacoesfisicas:ver_avaliacaofisica' aluno.avaliacaofisica.id %}" target="_blank" rel="noopener noreferrer">
-        {{ aluno.avaliacaofisica.numero }}
-    </a>
+<div class="container-detalhes">
+    <b>Detalhes do Aluno</b>
     
-Gerada em: {{ aluno.avaliacaofisica.data_avaliacao|date:"d/m/Y" }}
-{% else %}
-    <span style="color: red;">Não gerada</span>
-{% endif %}
-<br />
-
-<b>Ficha Médica:</b>
-{% if aluno.fichamedica.all %}
-    {% for ficha in aluno.fichamedica.all %}
-        <br />• Observação médica: {{ ficha.observacao|default:"Sem observações" }}
-    {% endfor %}
-{% else %}
-    Nenhuma registrada
-{% endif %}
-<br />
-<br />
-
-<a href="{% url 'alunos:listar_alunos' %}">Voltar para a Lista</a>
+    <div class="detalhes-info">
+        <b>ID do Aluno:</b> <span>{{ aluno.id }}</span>
+    </div>
+    
+    <div class="detalhes-info">
+        <b>Nome Completo:</b> <span>{{ aluno.nome }} {{ aluno.sobrenome }}</span>
+    </div>
+    
+    <div class="detalhes-info">
+        <b>Avaliação Física:</b>
+        {% if aluno.avaliacaofisica %}
+            <a href="{% url 'avaliacoesfisicas:ver_avaliacaofisica' aluno.avaliacaofisica.id %}" target="_blank" rel="noopener noreferrer">
+                {{ aluno.avaliacaofisica.numero }}
+            </a>
+            <br />
+            <span style="margin-left: 150px; display: inline-block;">
+                Gerada em: {{ aluno.avaliacaofisica.data_avaliacao|date:"d/m/Y" }}
+            </span>
+            <br />
+            <a href="{% url 'avaliacoesfisicas:editar_avaliacaofisica' aluno.avaliacaofisica.id %}" style="margin-top: 10px; display: inline-block; color: blue;">
+                📝 Adicionar/Editar Dados
+            </a>
+        {% else %}
+            <span class="no-data">Não gerada</span>
+            <br />
+            <a href="{% url 'avaliacoesfisicas:adicionar_avaliacaofisica' %}" style="margin-top: 10px; display: inline-block; color: green;">
+                ➕ Criar Avaliação Física
+            </a>
+        {% endif %}
+    </div>
+    
+    <div class="detalhes-info">
+        <b>Ficha Médica:</b>
+        {% if aluno.fichamedica.all %}
+            {% for ficha in aluno.fichamedica.all %}
+                <div class="ficha-item">
+                    <br />• Observação médica: {{ ficha.observacao|default:"Sem observações" }}
+                </div>
+            {% endfor %}
+        {% else %}
+            <span class="no-data">Nenhuma registrada</span>
+        {% endif %}
+    </div>
+    
+    <a href="{% url 'alunos:listar_alunos' %}" class="link-voltar">
+        ↩️ Voltar para a Lista
+    </a>
+</div>
 {% endblock %}
