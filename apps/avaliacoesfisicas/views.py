@@ -2,7 +2,7 @@ from django.shortcuts import render, get_object_or_404
 from avaliacoesfisicas.models import Avaliacaofisica
 from django.contrib.auth.decorators import login_required
 
-@login_required(login_url='/contas/login/')
+
 def criar_avaliacaofisica_para_aluno(aluno):
     if hasattr(aluno, 'avaliacaofisica'):
         return aluno.avaliacaofisica
