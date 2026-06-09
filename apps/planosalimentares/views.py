@@ -19,7 +19,7 @@ def listar_planosalimentares(request):
 @login_required(login_url='/contas/login/')
 def lista_refeicoes_alimentos(request):
     template_name = 'planosalimentares/lista_refeicoes_alimentos.html'
-    alimentos = Alimento.objects.filter(esta_ativo=True)
+    alimentos = Alimento.objects.extra(where=['esta_ativo = 1'])
     context = {
         'alimentos': alimentos,
     }

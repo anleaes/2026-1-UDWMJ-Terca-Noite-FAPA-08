@@ -19,7 +19,7 @@ def listar_fichastreinos(request):
 @login_required(login_url='/contas/login/')
 def lista_treinos_exercicios(request):
     template_name = 'fichastreinos/lista_treinos_exercicios.html'
-    exercicios = Exercicio.objects.filter(esta_ativo=True)
+    exercicios = Exercicio.objects.extra(where=['esta_ativo = 1'])
     context = {
         'exercicios': exercicios,
     }
@@ -125,7 +125,7 @@ def checkout(request):
                 repeticao=repeticao,
                 intervalo=intervalo,
                 observacao=observacao,
-                nome=dia_treino
+                dia_treino=dia_treino
             )
         request.session['carrinho'] = {}
         request.session.modified = True
