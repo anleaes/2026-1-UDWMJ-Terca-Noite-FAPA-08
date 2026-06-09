@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+Adicionar Avaliação Física - {{ block.super }}
+{% endblock title %}
+
+{% block body %}
+<div class="container-form">
+    <b>📋 Dados da Avaliação Física {% if avaliacaofisica %}de {{ avaliacaofisica.aluno }}{% endif %}</b>
+    
+    <form action="" method="POST" id="avaliacaofisicaForm">
+        {% csrf_token %}
+
+        {% if not avaliacaofisica %}
+        <label>Aluno</label>
+        <br />
+        {{ form.aluno }}
+        <br />
+        <br />
+        {% endif %}
+
+        <label>Peso (kg)</label>
+        <br />
+        {{ form.peso }}
+        <br />
+        <br />
+
+        <label>Altura (m)</label>
+        <br />
+        {{ form.altura }}
+        <br />
+        <br />
+
+        <label>Percentual de Gordura (%)</label>
+        <br />
+        {{ form.percentual_gordura }}
+        <br />
+        <br />
+
+        <label>Massa Magra (kg)</label>
+        <br />
+        {{ form.massa_magra }}
+        <br />
+        <br />
+
+        <button type="submit">💾 Salvar</button>
+    </form>
+</div>
+{% endblock body %}

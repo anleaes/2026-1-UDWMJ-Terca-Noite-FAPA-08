@@ -28,8 +28,16 @@ Detalhes do Aluno - {{ block.super }}
             <span style="margin-left: 150px; display: inline-block;">
                 Gerada em: {{ aluno.avaliacaofisica.data_avaliacao|date:"d/m/Y" }}
             </span>
+            <br />
+            <a href="{% url 'avaliacoesfisicas:editar_avaliacaofisica' aluno.avaliacaofisica.id %}" style="margin-top: 10px; display: inline-block; color: blue;">
+                📝 Adicionar/Editar Dados
+            </a>
         {% else %}
             <span class="no-data">Não gerada</span>
+            <br />
+            <a href="{% url 'avaliacoesfisicas:adicionar_avaliacaofisica' %}" style="margin-top: 10px; display: inline-block; color: green;">
+                ➕ Criar Avaliação Física
+            </a>
         {% endif %}
     </div>
     
